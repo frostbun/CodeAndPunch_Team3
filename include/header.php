@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-
+<?php
+  session_start();
+  require_once 'include/database.php';
+  require_once 'include/register-inc.php';
+?>
 <html>
   <head>
     <meta charset="utf-8">
