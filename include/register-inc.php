@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     header("Location: ../register.php?error=passwordDoNotMatch");
     exit();
   } else {
-    $sql = "SELECT * FROM User WHERE username=?";
+    $sql = "SELECT username FROM User WHERE username=?";
     $statement = mysqli_stmt_init($connect);
     if (!mysqli_stmt_prepare($sql,$statement)) {
       header("Location: ../register.php?error=sqlError");
