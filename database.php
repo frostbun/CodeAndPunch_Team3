@@ -1,7 +1,7 @@
 <?php
   $dbHost = "localhost";
-  $dbUser="manh";
-  $dbPass="manh6264";
+  $dbUser="ehc";
+  $dbPass="ehcteam3";
   $dbName="webDemo";
 
   $connect = mysqli_connect($dbHost,$dbUser,$dbPass,$dbName);
