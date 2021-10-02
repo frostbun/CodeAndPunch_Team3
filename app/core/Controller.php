@@ -1,14 +1,13 @@
 <?php
     abstract class Controller {
 
-        public abstract function index();
-
-        public function model($model) {
-            require_once "app/models/" . $model . ".php";
-            return new $model();
+        public function Controller() {
+            session_start();
         }
+        
+        public abstract function render();
 
-        public function view($view, $data = []) {
+        public static function view($view, $data = []) {
             require_once "app/views/" . $view . ".php";
         }
     }
