@@ -3,7 +3,7 @@
 
         public function render() {
             if(isset($_SESSION["sessionId"])) {
-                Controller::view("index", ["message"=>"You are logged in"]);
+                Controller::view("index", ["message"=>"You are logged in as $_SESSION[sessionUser]"]);
                 return;
             }
             Controller::view("register");
@@ -11,7 +11,7 @@
 
         public function query() {
             if(isset($_SESSION["sessionId"])) {
-                Controller::view("index", ["message"=>"You are logged in"]);
+                Controller::view("index", ["message"=>"You are logged in as $_SESSION[sessionUser]"]);
                 return;
             }
             if(isset($_POST["submit"])) {
@@ -30,7 +30,7 @@
 
                 User::insert("Teacher", $_POST["username"], $_POST["password"], $_POST["fullname"], $_POST["email"], $_POST["phone"]);
                 User::login("Teacher", $_POST["username"], $_POST["password"]);
-                Controller::view("index", ["message"=>"You are logged in"]);
+                Controller::view("index", [["message"=>"You are logged in as $_SESSION[sessionUser]"]]);
                 return;
             }
             Controller::view("register");

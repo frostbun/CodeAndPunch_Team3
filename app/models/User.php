@@ -25,10 +25,14 @@
             if(!password_verify($password, $user->password)) {
                 return "Wrong password";
             }
-            session_start();
             $_SESSION["sessionId"] = $user->id;
             $_SESSION["sessionUser"] = $user->username;
             return "ok";
+        }
+
+        public static function logout() {
+            unset($_SESSION["sessionId"]);
+            unset($_SESSION["sessionUser"]);
         }
 
         public static function getByUsername($table, $username) {

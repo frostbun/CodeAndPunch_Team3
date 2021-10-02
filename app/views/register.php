@@ -1,6 +1,4 @@
-<?php
-    require_once "header.php";
-?>
+<?php require_once "header.php" ?>
 
 <div>
     <h1>Register</h1>
@@ -12,11 +10,9 @@
         <input type="text" name="fullname" placeholder="Full Name">
         <input type="email" name="email" placeholder="Email">
         <input type="tel" name="phone" placeholder="Phone Number">
-        <?php echo "$data[message]<br>" ?>
+        <?= "$data[message]<br>" ?>
         <button type="submit" name="submit">Register</button>
     </form>
 </div>
 
-<?php
-    require_once "footer.php";
-?>
+<?php require_once "footer.php" ?>
