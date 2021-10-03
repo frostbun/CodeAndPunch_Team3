@@ -1,5 +1,5 @@
 <?php
-    class Logout extends Controller{
+    class Logout extends Controller {
 
         public function render() {
             require_once "app/models/User.php";

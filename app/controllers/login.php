@@ -1,17 +1,14 @@
 <?php
-    class Login extends Controller{
+    class Login extends Controller {
 
         public function render() {
-            if(isset($_SESSION["sessionId"])) {
-                Controller::view("index", ["message"=>"You are logged in as $_SESSION[sessionUser]"]);
-                return;
+            if(!Controller::loggedIn()) {
+                Controller::view("login");
             }
-            Controller::view("login");
         }
 
         public function query() {
-            if(isset($_SESSION["sessionId"])) {
-                Controller::view("index", ["message"=>"You are logged in as $_SESSION[sessionUser]"]);
+            if(Controller::loggedIn()) {
                 return;
             }
             if(isset($_POST["submit"])) {

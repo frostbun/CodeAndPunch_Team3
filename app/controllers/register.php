@@ -1,17 +1,14 @@
 <?php
-    class Register extends Controller{
+    class Register extends Controller {
 
         public function render() {
-            if(isset($_SESSION["sessionId"])) {
-                Controller::view("index", ["message"=>"You are logged in as $_SESSION[sessionUser]"]);
-                return;
+            if(!Controller::loggedIn()) {
+                Controller::view("register");
             }
-            Controller::view("register");
         }
 
         public function query() {
-            if(isset($_SESSION["sessionId"])) {
-                Controller::view("index", ["message"=>"You are logged in as $_SESSION[sessionUser]"]);
+            if(Controller::loggedIn()) {
                 return;
             }
             if(isset($_POST["submit"])) {
