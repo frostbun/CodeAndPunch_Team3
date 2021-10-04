@@ -1,28 +1,35 @@
 <?php
     class Login extends Controller {
 
-        public function render() {
-            if(!Controller::loggedIn()) {
-                Controller::view("login");
+        public static function render() {
+            if(isset($_SESSION["sessionId"])) {
+                require_once "app/controllers/index.php";
+                return Index::render();
             }
+            return Controller::view("login");
         }
 
-        public function query() {
-            if(Controller::loggedIn()) {
-                return;
+        public static function query() {
+            if(isset($_SESSION["sessionId"])) {
+                require_once "app/controllers/index.php";
+                return Index::render();
             }
             if(isset($_POST["submit"])) {
-                require_once "app/models/User.php";
-                
-                $message = User::login("Teacher", $_POST["username"], $_POST["password"]);
-                if($message != "ok") {
-                    Controller::view("login", ["message"=>$message]);
-                    return;
+                require_once "app/models/Student.php";
+                require_once "app/models/Teacher.php";
+
+                $message = Teacher::login($_POST["username"], $_POST["password"]);
+                if($message == "User not found") {
+                    $message = Student::login($_POST["username"], $_POST["password"]);
+                    if($message != "ok") {
+                        return Controller::view("login", ["message"=>$message]);
+                    }
                 }
-                Controller::view("index", ["message"=>"You are logged in as $_SESSION[sessionUser]"]);
-                return;
+                if($message == "Wrong password") {
+                    return Controller::view("login", ["message"=>$message]);
+                }
             }
-            Controller::view("login");
+            return Login::render();
         }
     }
 ?>

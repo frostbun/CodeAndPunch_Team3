@@ -9,7 +9,16 @@
     <body>
         <header> <nav> <ul>
             <li> <a href="/">Home</a> </li>
-            <li> <a href="/login">Login</a> </li>
-            <li> <a href="/register">Register</a> </li>
-            <li> <a href="/logout">Logout</a> </li>
+            <?php
+                if(isset($_SESSION["sessionId"])) {
+                    if($_SESSION["sessionType"] == "Teacher") {
+                        echo '<li> <a href="/manage">Manage student</a> </li>';
+                    }
+                    echo '<li> <a href="/logout">Logout</a> </li>';
+                }
+                else {
+                    echo '<li> <a href="/login">Login</a> </li>';
+                    echo '<li> <a href="/register">Register</a> </li>';
+                }
+            ?>
         </ul> </nav> </header>

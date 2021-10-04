@@ -1,6 +1,7 @@
 <?php
-    // require_once "app/resetsql.php";
-    require_once "app/init.php";
+    require_once "app/core/App.php";
+    require_once "app/core/Controller.php";
+    require_once "app/core/Model.php";
 
     $app = new App();
 ?>

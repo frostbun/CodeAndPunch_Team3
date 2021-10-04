@@ -7,8 +7,15 @@
     $db->query("CREATE DATABASE Classroom");
     $db->query("USE Classroom");
     $db->query("CREATE TABLE Teacher (
-        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(50),
+        username VARCHAR(50) PRIMARY KEY,
+        password VARCHAR(256),
+        fullname VARCHAR(50),
+        email VARCHAR(50),
+        phone VARCHAR(20)
+        )");
+    $db->query("CREATE TABLE Student (
+        teacher VARCHAR(50),
+        username VARCHAR(50) PRIMARY KEY,
         password VARCHAR(256),
         fullname VARCHAR(50),
         email VARCHAR(50),

@@ -1,11 +1,11 @@
 <?php
     class Logout extends Controller {
 
-        public function render() {
+        public static function render() {
             require_once "app/models/User.php";
-
             User::logout();
-            Controller::view("index", ["message"=>"You are logged out"]);
+            require_once "app/controllers/index.php";
+            return Index::render();
         }
     }
 ?>

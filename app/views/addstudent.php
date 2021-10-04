@@ -1,9 +1,8 @@
 <?php require_once "header.php" ?>
 
 <div>
-    <h1>Register as a teacher</h1>
-    <p>Already have account? <a href="/login">Login here</a></p>
-    <form action="/register/query" method="POST" enctype= "multipart/form-data">
+    <h1>Add a student</h1>
+    <form action="/addstudent/query" method="POST" enctype= "multipart/form-data">
         <input type="text" name="username" placeholder="Username">
         <input type="password" name="password" placeholder="Password">
         <input type="password" name="confirm" placeholder="Confirm Password">
@@ -11,7 +10,7 @@
         <input type="email" name="email" placeholder="Email">
         <input type="tel" name="phone" placeholder="Phone Number">
         <?= "$data[message]<br>" ?>
-        <button type="submit" name="submit">Register</button>
+        <button type="submit" name="submit">Add</button>
     </form>
 </div>
 
