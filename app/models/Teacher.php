@@ -1,31 +1,15 @@
 <?php
     class Teacher extends User {
 
-        public static function login($username, $password) {
-            $user = Teacher::getByUsername($username);
-            if(!$user) {
-                return "User not found";
-            }
-            if(!password_verify($password, $user["password"])) {
-                return "Wrong password";
-            }
-            $_SESSION["sessionId"] = $user["username"];
-            $_SESSION["sessionType"] = "Teacher";
-            return "ok";
-        }
-
         public static function getByUsername($username) {
             $db = Model::connect();
-            
             $stmt = $db->prepare("SELECT * FROM Teacher WHERE username=?");
             $stmt->bind_param("s", $username);
             $stmt->execute();
-
             $result = $stmt->get_result();
             if ($result->num_rows == 0) {
                 return false;
             }
-
             $stmt->close();
             $db->close();
             return $result->fetch_assoc();

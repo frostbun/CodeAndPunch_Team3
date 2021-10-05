@@ -19,7 +19,7 @@
                 echo "<td>$student[email]</td>";
                 echo "<td>$student[phone]</td>";
                 if($_SESSION["sessionType"] == "Teacher") {
-                    echo "<td> <a href='/modify/$student[username]'>Edit</a> </td>";
+                    echo "<td> <a href='/edit/$student[username]'>Edit</a> </td>";
                 }
                 echo "</tr>";
             }
@@ -30,7 +30,8 @@
             echo '<p> <a href="/addstudent">Add a student</a> </p>';
         }
     ?>
-    <p> <a href="/modify/<?=$_SESSION["sessionId"]?>">Edit personal information</a> </p>
+    <p> <a href="/edit/<?=$_SESSION["sessionId"]?>">Edit personal information</a> </p>
+    <p> <a href="/changepw">Change password</a> </p>
 </div>
 
 <?php require_once "footer.php" ?>

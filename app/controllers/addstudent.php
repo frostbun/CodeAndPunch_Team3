@@ -20,11 +20,11 @@
 
             $message = User::validate($_POST["username"], $_POST["password"], $_POST["confirm"], $_POST["fullname"], $_POST["email"], $_POST["phone"]);
             if($message != "ok") {
-                return Controller::view("addstudent", ["message"=>$message]);
+                return Controller::view("addstudent", ["message"=>$message, "user"=>$_POST]);
             }
             
             if(Teacher::getByUsername($_POST["username"]) || Student::getByUsername($_POST["username"])) {
-                return Controller::view("addstudent", ["message"=>"User existed"]);
+                return Controller::view("addstudent", ["message"=>"User existed", "user"=>$_POST]);
             }
 
             Student::insert($_SESSION["sessionId"], $_POST["username"], $_POST["password"], $_POST["fullname"], $_POST["email"], $_POST["phone"]);

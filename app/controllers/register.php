@@ -16,11 +16,11 @@
             
             $message = User::validate($_POST["username"], $_POST["password"], $_POST["confirm"], $_POST["fullname"], $_POST["email"], $_POST["phone"]);
             if($message != "ok") {
-                return Controller::view("register", ["message"=>$message]);
+                return Controller::view("register", ["message"=>$message, "user"=>$_POST]);
             }
             
             if(Teacher::getByUsername($_POST["username"]) || Student::getByUsername($_POST["username"])) {
-                return Controller::view("register", ["message"=>"User existed"]);
+                return Controller::view("register", ["message"=>"User existed", "user"=>$_POST]);
             }
 
             Teacher::insert($_POST["username"], $_POST["password"], $_POST["fullname"], $_POST["email"], $_POST["phone"]);
