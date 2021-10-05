@@ -1,5 +1,5 @@
 <?php
-    abstract class Controller {
+    class Controller {
 
         public function Controller() {
             session_start();

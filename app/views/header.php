@@ -11,9 +11,7 @@
             <li> <a href="/">Home</a> </li>
             <?php
                 if(isset($_SESSION["sessionId"])) {
-                    if($_SESSION["sessionType"] == "Teacher") {
-                        echo '<li> <a href="/manage">Manage student</a> </li>';
-                    }
+                    echo '<li> <a href="/manage">View students</a> </li>';
                     echo '<li> <a href="/logout">Logout</a> </li>';
                 }
                 else {

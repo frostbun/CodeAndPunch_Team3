@@ -7,9 +7,14 @@
                 return Login::render();
             }
             if($_SESSION["sessionType"] == "Teacher") {
-                require_once "app/models/Student.php";
-                $user = Student::getByTeacher($_SESSION["sessionId"]);
-                return Controller::view("manage", ["user"=>$user]);
+                $student = Student::getByTeacher($_SESSION["sessionId"]);
+                $teacher = Teacher::getByUsername($_SESSION["sessionId"]);
+                return Controller::view("manage", ["student"=>$student, "teacher"=>$teacher]);
+            }
+            if($_SESSION["sessionType"] == "Student") {
+                $student = Student::getByTeacher(Student::getByUsername($_SESSION["sessionId"])["teacher"]);
+                $teacher = Teacher::getByUsername(Student::getByUsername($_SESSION["sessionId"])["teacher"]);
+                return Controller::view("manage", ["student"=>$student, "teacher"=>$teacher]);
             }
             require_once "app/controllers/index.php";
             return Index::render();

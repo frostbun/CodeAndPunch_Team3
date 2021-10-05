@@ -1,5 +1,5 @@
 <?php
-    abstract class User extends Model {
+    class User extends Model {
 
         public static function logout() {
             unset($_SESSION["sessionId"]);
@@ -10,7 +10,13 @@
             
             if (empty($username) || empty($password) || empty($confirm) ||
                 empty($fullname) || empty($email) || empty($phone)) {
-                return "message";
+                return "Empty";
+            }
+
+            $invalidUsername = ["index", "query"];
+
+            if(in_array($username, $invalidUsername)) {
+                return "Invalid username";
             }
 
             if (!preg_match("/^[a-zA-Z0-9]*/","$username")) {

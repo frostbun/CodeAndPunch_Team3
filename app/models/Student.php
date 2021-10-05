@@ -1,6 +1,4 @@
 <?php
-    require_once "app/models/User.php";
-    
     class Student extends User {
 
         public static function login($username, $password) {
