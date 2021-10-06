@@ -14,15 +14,8 @@
                 return Login::render();
             }
 
-            $message = Teacher::login($_POST["username"], $_POST["password"]);
-            if($message == "User not found") {
-                $message = Student::login($_POST["username"], $_POST["password"]);
-                if($message != "ok") {
-                    return Controller::view("login", ["message"=>$message, "user"=>$_POST]);
-                }
-            }
-
-            if($message == "Wrong password") {
+            $message = User::login($_POST["username"], $_POST["password"]);
+            if(isset($message)) {
                 return Controller::view("login", ["message"=>$message, "user"=>$_POST]);
             }
             

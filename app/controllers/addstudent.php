@@ -19,7 +19,7 @@
             }
 
             $message = User::validate($_POST["username"], $_POST["password"], $_POST["confirm"], $_POST["fullname"], $_POST["email"], $_POST["phone"]);
-            if($message != "ok") {
+            if(isset($message)) {
                 return Controller::view("addstudent", ["message"=>$message, "user"=>$_POST]);
             }
             

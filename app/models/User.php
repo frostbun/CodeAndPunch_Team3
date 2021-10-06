@@ -13,14 +13,14 @@
                 }
                 $_SESSION["sessionId"] = $user["username"];
                 $_SESSION["sessionType"] = "Student";
-                return "ok";
+                return null;
             }
             if(!password_verify($password, $user["password"])) {
                 return "Wrong password";
             }
             $_SESSION["sessionId"] = $user["username"];
             $_SESSION["sessionType"] = "Teacher";
-            return "ok";
+            return null;
         }
 
         public static function logout() {
@@ -35,7 +35,7 @@
                 return "Empty";
             }
 
-            $invalidUsername = ["render", "query"];
+            $invalidUsername = ["render", "query", "null"];
 
             if(in_array($username, $invalidUsername)) {
                 return "Invalid username";
@@ -49,7 +49,7 @@
                 return "Password not match";
             }
 
-            return "ok";
+            return null;
         }
    
         public static function update($username, $fullname, $email, $phone) {

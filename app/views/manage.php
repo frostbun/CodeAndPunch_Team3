@@ -20,6 +20,7 @@
                 echo "<td>$student[phone]</td>";
                 if($_SESSION["sessionType"] == "Teacher") {
                     echo "<td> <a href='/edit/$student[username]'>Edit</a> </td>";
+                    echo "<td> <a href='/delete/$student[username]'>Delete</a> </td>";
                 }
                 echo "</tr>";
             }

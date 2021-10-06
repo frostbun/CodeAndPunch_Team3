@@ -41,5 +41,14 @@
             $stmt->close();
             $db->close();
         }
+
+        public static function delete($username) {
+            $db = Model::connect();
+            $stmt = $db->prepare("DELETE FROM Student WHERE username=?");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $stmt->close();
+            $db->close();
+        }
     }
 ?>
