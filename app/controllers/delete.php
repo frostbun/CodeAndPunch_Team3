@@ -3,16 +3,14 @@
 
         public static function render($user = null) {
             if(!isset($_SESSION["sessionId"])) {
-                require_once "app/controllers/login.php";
-                return Login::render();
+                return Controller::redirect("login");
             }
             
             if($_SESSION["sessionType"] == "Teacher" && Student::getByUsername($user)["teacher"] == $_SESSION["sessionId"]) {
                 Student::delete($user);
             }
             
-            require_once "app/controllers/manage.php";
-            return Manage::render();
+            return Controller::redirect("manage");
         }
     }
 ?>

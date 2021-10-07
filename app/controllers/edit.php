@@ -3,8 +3,7 @@
 
         public static function render($user = null) {
             if(!isset($_SESSION["sessionId"])) {
-                require_once "app/controllers/login.php";
-                return Login::render();
+                return Controller::redirect("login");
             }
             
             if($user == $_SESSION["sessionId"] ||
@@ -20,8 +19,7 @@
                 return Controller::view("edit", ["user"=>$user]);
             }
             
-            require_once "app/controllers/manage.php";
-            return Manage::render();
+            return Controller::redirect("manage");
         }
         
         public static function query($user = null) {
@@ -43,8 +41,7 @@
                 User::update($user, $_POST["fullname"], $_POST["email"], $_POST["phone"]);
             }
             
-            require_once "app/controllers/manage.php";
-            return Manage::render();
+            return Controller::redirect("manage");
         }
     }
 ?>

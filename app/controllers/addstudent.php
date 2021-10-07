@@ -3,14 +3,12 @@
 
         public static function render() {
             if(!isset($_SESSION["sessionId"])) {
-                require_once "app/controllers/login.php";
-                return Login::render();
+                return Controller::redirect("login");
             }
             if($_SESSION["sessionType"] == "Teacher") {
                 return Controller::view("addstudent");
             }
-            require_once "app/controllers/manage.php";
-            return Manage::render();
+            return Controller::redirect("manage");
         }
         
         public static function query() {
@@ -28,8 +26,7 @@
             }
 
             Student::insert($_SESSION["sessionId"], $_POST["username"], $_POST["password"], $_POST["fullname"], $_POST["email"], $_POST["phone"]);
-            require_once "app/controllers/manage.php";
-            return Manage::render();
+            return Controller::redirect("manage");
         }
     }
 ?>

@@ -3,8 +3,7 @@
 
         public static function render() {
             if(!isset($_SESSION["sessionId"])) {
-                require_once "app/controllers/login.php";
-                return Login::render();
+                return Controller::redirect("login");
             }
             return Controller::view("changepw");
         }
@@ -25,8 +24,7 @@
             }
             
             User::changepw($_SESSION["sessionId"], $_POST["newpass"]);
-            require_once "app/controllers/manage.php";
-            return Manage::render();
+            return Controller::redirect("manage");
         }
     }
 ?>

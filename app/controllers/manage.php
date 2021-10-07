@@ -3,8 +3,7 @@
 
         public static function render() {
             if(!isset($_SESSION["sessionId"])) {
-                require_once "app/controllers/login.php";
-                return Login::render();
+                return Controller::redirect("login");
             }
 
             if($_SESSION["sessionType"] == "Teacher") {

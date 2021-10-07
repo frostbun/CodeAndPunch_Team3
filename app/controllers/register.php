@@ -3,8 +3,7 @@
 
         public static function render() {
             if(isset($_SESSION["sessionId"])) {
-                require_once "app/controllers/index.php";
-                return Index::render();
+                return Controller::redirect("login");
             }
             return Controller::view("register");
         }
