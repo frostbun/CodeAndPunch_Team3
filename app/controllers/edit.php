@@ -22,23 +22,22 @@
             return Controller::redirect("manage");
         }
         
-        public static function query($user = null) {
+        public static function query() {
             if(!isset($_SESSION["sessionId"]) || !isset($_POST["submit"])) {
-                return Edit::render($user);
+                return Edit::render($_POST["username"]);
             }
 
-            $_POST["username"] = $user;
-            $_POST["fullname"] = $_SESSION["sessionType"] == "Teacher" ? $_POST["fullname"] : Student::getByUsername($user)["fullname"];
-            $message = User::validate($user, "AAaa12@#", "AAaa12@#", $_POST["fullname"], $_POST["email"], $_POST["phone"]);
+            $_POST["fullname"] = $_SESSION["sessionType"] == "Teacher" ? $_POST["fullname"] : Student::getByUsername($_POST["username"])["fullname"];
+            $message = User::validate($_POST["username"], "AAaa12@#", "AAaa12@#", $_POST["fullname"], $_POST["email"], $_POST["phone"]);
             if(isset($message)) {
                 return Controller::view("edit", ["message"=>$message, "user"=>$_POST]);
             }
             
-            if($user == $_SESSION["sessionId"] ||
+            if($_POST["username"] == $_SESSION["sessionId"] ||
                 ($_SESSION["sessionType"] == "Teacher" &&
-                Student::getByUsername($user)["teacher"] == $_SESSION["sessionId"])
+                Student::getByUsername($_POST["username"])["teacher"] == $_SESSION["sessionId"])
             ) {
-                User::update($user, $_POST["fullname"], $_POST["email"], $_POST["phone"]);
+                User::update($_POST["username"], $_POST["fullname"], $_POST["email"], $_POST["phone"]);
             }
             
             return Controller::redirect("manage");

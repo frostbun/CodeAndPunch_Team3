@@ -2,25 +2,26 @@
     class User extends Model {
 
         public static function login($username, $password) {
-            $user = Teacher::getByUsername($username);
-            if(!$user) {
-                $user = Student::getByUsername($username);
-                if(!$user) {
-                    return "User not found";
-                }
-                if(!password_verify($password, $user["password"])) {
-                    return "Wrong password";
-                }
-                $_SESSION["sessionId"] = $user["username"];
-                $_SESSION["sessionType"] = "Student";
-                return null;
+            if(Teacher::getByUsername($username)) {
+                $user = Teacher::getByUsername($username);
             }
+            else {
+                $user = Student::getByUsername($username);
+            }
+
+            if(!$user) {
+                return "User not found";
+            }
+
             if(!password_verify($password, $user["password"])) {
                 return "Wrong password";
             }
+            
             $_SESSION["sessionId"] = $user["username"];
-            $_SESSION["sessionType"] = "Teacher";
+            $_SESSION["sessionType"] = "Student";
             return null;
+
+            
         }
 
         public static function logout() {
