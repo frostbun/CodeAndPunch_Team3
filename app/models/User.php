@@ -51,7 +51,7 @@
 
             return null;
         }
-   
+
         public static function update($username, $fullname, $email, $phone) {
             $db = Model::connect();
 
