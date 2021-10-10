@@ -1,7 +1,7 @@
 <?php require_once "header.php" ?>
 
 <div>
-    <h1><?= $data["teacher"]["fullname"] ?>'s class</h1>
+    <h1><?= $data["teacher"]["fullname"] ?>'s students</h1>
     <table>
         <tr>
             <th>No.</th>

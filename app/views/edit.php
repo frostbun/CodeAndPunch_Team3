@@ -10,7 +10,7 @@
         ?>
         <input type="hidden" name="username" value="<?=$data["user"]["username"]?>">
         <input type="email" name="email" placeholder="Email" value="<?=$data["user"]["email"]?>">
-        <input type="tel" name="phone" placeholder="Phone Number" value="<?=$data["user"]["phone"]?>">
+        <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" value="<?=$data["user"]["phone"]?>">
         <?= "$data[message]<br>" ?>
         <button type="submit" name="submit">Change</button>
     </form>

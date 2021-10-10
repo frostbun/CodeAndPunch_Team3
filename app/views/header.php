@@ -12,6 +12,7 @@
             <?php
                 if(isset($_SESSION["sessionId"])) {
                     echo '<li> <a href="/manage">View students</a> </li>';
+                    echo '<li> <a href="/homework">View homeworks</a> </li>';
                     echo '<li> <a href="/logout">Logout</a> </li>';
                 }
                 else {

@@ -4,12 +4,14 @@
         public static function login($username, $password) {
             if(Teacher::getByUsername($username)) {
                 $user = Teacher::getByUsername($username);
+                $type = "Teacher";
             }
             else {
                 $user = Student::getByUsername($username);
+                $type = "student";
             }
 
-            if(!$user) {
+            if($user === false) {
                 return "User not found";
             }
 
@@ -18,10 +20,8 @@
             }
             
             $_SESSION["sessionId"] = $user["username"];
-            $_SESSION["sessionType"] = "Student";
+            $_SESSION["sessionType"] = $type;
             return null;
-
-            
         }
 
         public static function logout() {
@@ -36,9 +36,9 @@
                 return "Empty";
             }
 
-            $invalidUsername = ["render", "query", "null"];
+            $invalidUsername = ["render", "query", "null", "homework"];
 
-            if(in_array($username, $invalidUsername)) {
+            if(in_array(strtolower($username), $invalidUsername)) {
                 return "Invalid username";
             }
 
