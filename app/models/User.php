@@ -8,7 +8,7 @@
             }
             else {
                 $user = Student::getByUsername($username);
-                $type = "student";
+                $type = "Student";
             }
 
             if($user === false) {
@@ -19,14 +19,14 @@
                 return "Wrong password";
             }
             
-            $_SESSION["sessionId"] = $user["username"];
-            $_SESSION["sessionType"] = $type;
+            $_SESSION["user"] = $user["username"];
+            $_SESSION["type"] = $type;
             return null;
         }
 
         public static function logout() {
-            unset($_SESSION["sessionId"]);
-            unset($_SESSION["sessionType"]);
+            unset($_SESSION["user"]);
+            unset($_SESSION["type"]);
         }
         
         public static function validate($username, $password, $confirm, $fullname, $email, $phone) {
@@ -36,13 +36,21 @@
                 return "Empty";
             }
 
-            $invalidUsername = ["render", "query", "null", "homework"];
+            $invalidUsername = ["render", "query", "null", "newhomework", "handin"];
 
             if(in_array(strtolower($username), $invalidUsername)) {
                 return "Invalid username";
             }
 
             if (!preg_match("/^[a-zA-Z0-9]*/","$username")) {
+                return "placeholder";
+            }
+
+            if (!preg_match("/^[a-zA-Z0-9]*/","$password")) {
+                return "placeholder";
+            }
+
+            if (!preg_match("/^[a-zA-Z0-9]*/","$fullname")) {
                 return "placeholder";
             }
 

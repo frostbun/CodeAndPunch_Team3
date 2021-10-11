@@ -30,12 +30,27 @@
 
         public static function download($path, $file) {
             $target = $path . basename($file);
+            echo $target;
             if(file_exists($target)) {
                 header("Content-Type: application/octet-stream");
                 header("Content-Transfer-Encoding: Binary"); 
                 header("Content-disposition: attachment; filename=\"" . basename($file) . "\""); 
                 readfile($target);
             }
+        }
+
+        public static function getById($id) {
+            $db = Model::connect();
+            $stmt = $db->prepare("SELECT * FROM Upload WHERE id=?");
+            $stmt->bind_param("s", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if($result->num_rows == 0) {
+                return false;
+            }
+            $stmt->close();
+            $db->close();
+            return $result->fetch_assoc();
         }
 
         public static function getByAuthor($author) {
@@ -51,6 +66,7 @@
             for($i=0; $i<$result->num_rows; ++$i) {
                 array_push($file, $result->fetch_assoc());
             }
+            $stmt->close();
             $db->close();
             return $file;
         }

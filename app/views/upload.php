@@ -3,11 +3,15 @@
 <div>
     <h1>Upload your file</h1>
     <form action="/upload/<?=$data["type"]?>" method="POST" enctype= "multipart/form-data">
-        <label>Homework:</label>
+        <label><?=$data["label"]?></label>
         <input type="file" name="file" accept=".pdf, .doc, .docx, .txt">
-        <label>Deadline:</label>
-        <input type="date" id="deadline" name="deadline" value="<?=date("Y-m-d")?>" min="<?=date("Y-m-d")?>">
-        <?= "$data[message]<br>" ?>
+        <?php
+            if($_SESSION["type"] == "Teacher") {
+                echo "<label>Deadline:</label>";
+                echo "<input type='date' id='deadline' name='deadline' value='" . date('Y-m-d') . "' min='" . date('Y-m-d') . "'>";
+            }
+        ?>
+        <?=$data["message"]?> <br>
         <button type="submit" name="submit">Upload</button>
     </form>
 </div>

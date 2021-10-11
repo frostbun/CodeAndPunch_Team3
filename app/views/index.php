@@ -2,8 +2,8 @@
 
 <div>
     <h1> <?php
-        if(isset($_SESSION["sessionId"])) {
-            echo "You are logged in as $_SESSION[sessionId]";
+        if(isset($_SESSION["user"])) {
+            echo "You are logged in as $_SESSION[user]";
         }
         else {
             echo "You are logged out";

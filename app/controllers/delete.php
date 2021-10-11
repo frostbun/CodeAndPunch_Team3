@@ -1,12 +1,12 @@
 <?php
     class Delete extends Controller {
 
-        public static function render($user = null) {
-            if(!isset($_SESSION["sessionId"])) {
+        public static function render($user = "") {
+            if(!isset($_SESSION["user"])) {
                 return Controller::redirect("login");
             }
             
-            if($_SESSION["sessionType"] == "Teacher" && Student::getByUsername($user)["teacher"] == $_SESSION["sessionId"]) {
+            if($_SESSION["type"] == "Teacher" && Student::getByUsername($user)["teacher"] == $_SESSION["user"]) {
                 Student::delete($user);
             }
             

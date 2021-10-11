@@ -1,7 +1,7 @@
 <?php require_once "header.php" ?>
 
 <div>
-    <h1><?= $data["teacher"]["fullname"] ?>'s students</h1>
+    <h1><?= $data["teacher"]["fullname"] ?> students</h1>
     <table>
         <tr>
             <th>No.</th>
@@ -18,7 +18,7 @@
                 echo "<td>$student[fullname]</td>";
                 echo "<td>$student[email]</td>";
                 echo "<td>$student[phone]</td>";
-                if($_SESSION["sessionType"] == "Teacher") {
+                if($_SESSION["type"] == "Teacher") {
                     echo "<td> <a href='/edit/$student[username]'>Edit</a> </td>";
                     echo "<td> <a href='/delete/$student[username]'>Delete</a> </td>";
                 }
@@ -27,11 +27,11 @@
         ?>
     </table>
     <?php 
-        if($_SESSION["sessionType"] == "Teacher") {
+        if($_SESSION["type"] == "Teacher") {
             echo '<p> <a href="/addstudent">Add a student</a> </p>';
         }
     ?>
-    <p> <a href="/edit/<?=$_SESSION["sessionId"]?>">Edit personal information</a> </p>
+    <p> <a href="/edit/<?=$_SESSION["user"]?>">Edit personal information</a> </p>
     <p> <a href="/changepw">Change password</a> </p>
 </div>
 

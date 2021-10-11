@@ -6,7 +6,7 @@
         <input type="password" name="password" placeholder="Password">
         <input type="password" name="newpass" placeholder="New Password">
         <input type="password" name="confirm" placeholder="Confirm Password">
-        <?= "$data[message]<br>" ?>
+        <?=$data["message"]?> <br>
         <button type="submit" name="submit">Change</button>
     </form>
 </div>
