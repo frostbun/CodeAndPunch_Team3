@@ -36,25 +36,25 @@
                 return "Empty";
             }
 
-            $invalidUsername = ["render", "query", "null", "newhomework", "handin"];
+            $invalidUsername = ["render", "query", "null", "true", "false", "newhomework", "handin"];
 
             if(in_array(strtolower($username), $invalidUsername)) {
                 return "Invalid username";
             }
 
-            if (!preg_match("/^[a-zA-Z0-9]*/","$username")) {
-                return "placeholder";
+            if(!preg_match("/^\w+$/", $username)) {
+                return "Username can only contains alphanumeric and underscore!";
             }
 
-            if (!preg_match("/^[a-zA-Z0-9]*/","$password")) {
-                return "placeholder";
+            if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/", $password)) {
+                return "Password must contain at least 8 characters, include 1 number, 1 lowercase letter, 1 uppercase letter, 1 special character!";
             }
 
-            if (!preg_match("/^[a-zA-Z0-9]*/","$fullname")) {
-                return "placeholder";
+            if(!preg_match("/^[a-zA-Z ]+$/", $fullname)) {
+                return "Full name can only contains English characters and spaces!";
             }
 
-            if ($password != $confirm) {
+            if($password != $confirm) {
                 return "Password not match";
             }
 

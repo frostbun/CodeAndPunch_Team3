@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>Classrom Management</title>
         <link rel="stylesheet" type="text/css" href="/style.css">
+        <script src="/script.js"> </script>
     </head>
 
     <body>
@@ -11,8 +12,9 @@
             <li> <a href="/">Home</a> </li>
             <?php
                 if(isset($_SESSION["user"])) {
-                    echo '<li> <a href="/manage">View students</a> </li>';
-                    echo '<li> <a href="/homework">View homeworks</a> </li>';
+                    echo '<li> <a href="/manage">Students</a> </li>';
+                    echo '<li> <a href="/homework">Homeworks</a> </li>';
+                    echo '<li> <a href="/game">Games</a> </li>';
                     echo '<li> <a href="/logout">Logout</a> </li>';
                 }
                 else {

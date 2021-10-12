@@ -18,7 +18,7 @@
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         teacher VARCHAR(50),
         username VARCHAR(50),
-        password VARCHAR(256),
+        password VARCHAR(255),
         fullname VARCHAR(50),
         email VARCHAR(50),
         phone VARCHAR(20)
@@ -27,7 +27,15 @@
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         author VARCHAR(50),
         path VARCHAR(50),
-        deadline DATE
+        deadline DATE,
+        hint VARCHAR(255)
+        )");
+    $db->query("CREATE TABLE Message (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        sender VARCHAR(50),
+        receiver VARCHAR(50),
+        content VARCHAR(255),
+        datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )");
     echo $db->error;
     $db->close();

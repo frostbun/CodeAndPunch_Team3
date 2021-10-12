@@ -3,7 +3,7 @@
 
         public static function getByTeacher($teacher) {
             $db = Model::connect();
-            $stmt = $db->prepare("SELECT * FROM Student WHERE teacher=?");
+            $stmt = $db->prepare("SELECT * FROM Student WHERE teacher=? ORDER BY fullname ASC");
             $stmt->bind_param("s", $teacher);
             $stmt->execute();
             $result = $stmt->get_result();

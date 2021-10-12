@@ -6,9 +6,9 @@
         }
 
         public static function redirect($controller, $params = []) {
-            // header("Location: /$controller/" . implode("/", $params));
-            require_once "../app/controllers/$controller.php";
-            call_user_func_array([$controller, "render"], $params);
+            header("Location: /$controller/" . implode("/", $params));
+            // require_once "../app/controllers/$controller.php";
+            // call_user_func_array([$controller, "render"], $params);
         }
     }
 ?>

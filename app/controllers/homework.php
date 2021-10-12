@@ -19,7 +19,7 @@
 
                 if($_SESSION["type"] == "Teacher") {
                     $handedIn = sizeof(glob("../uploads/handin/$file[id]/*"));
-                    $total = sizeof(Student::getByTeacher($teacher["username"]));
+                    $total = Student::getByTeacher($teacher["username"]) !== false ? sizeof(Student::getByTeacher($teacher["username"])) : 0;
                     $file["status"] = "$handedIn/$total students handed in";
                 }
 

@@ -1,7 +1,8 @@
 <?php require_once "header.php" ?>
 
 <div>
-    <h1><?= $data["teacher"]["fullname"] ?> students</h1>
+    <h1>Students</h1>
+    <h3> <a href="chat/<?=$data["teacher"]["username"]?>">Teacher: <?=$data["teacher"]["fullname"]?></a> </h3>
     <table>
         <tr>
             <th>No.</th>
@@ -18,6 +19,7 @@
                 echo "<td>$student[fullname]</td>";
                 echo "<td>$student[email]</td>";
                 echo "<td>$student[phone]</td>";
+                echo "<td> <a href='/chat/$student[username]'>Chat</a> </td>";
                 if($_SESSION["type"] == "Teacher") {
                     echo "<td> <a href='/edit/$student[username]'>Edit</a> </td>";
                     echo "<td> <a href='/delete/$student[username]'>Delete</a> </td>";

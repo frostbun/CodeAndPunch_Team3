@@ -1,7 +1,8 @@
 <?php require_once "header.php" ?>
 
 <div>
-    <h1><?= $data["teacher"]["fullname"] ?> homeworks</h1>
+    <h1>Homeworks</h1>    
+    <h3> <a href="chat/<?=$data["teacher"]["username"]?>">Teacher: <?=$data["teacher"]["fullname"]?></a> </h3>
     <table>
         <tr>
             <th>No.</th>
@@ -11,6 +12,7 @@
         </tr>
         <?php
             foreach($data["file"] as $file) {
+                if(strlen($file["hint"])) continue;
                 echo "<tr>";
                 echo "<td>" . ++$count . "</td>";
                 // echo "<td> <a href='/download/homework/$file[name]'>$file[name]</a> </td>";

@@ -71,10 +71,10 @@
             return $file;
         }
 
-        public static function insert($author, $path, $deadline) {
+        public static function insert($author, $path, $deadline, $hint) {
             $db = Model::connect();
-            $stmt = $db->prepare("INSERT INTO Upload (author, path, deadline) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $author, $path, $deadline);
+            $stmt = $db->prepare("INSERT INTO Upload (author, path, deadline, hint) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $author, $path, $deadline, $hint);
             $stmt->execute();
             $stmt->close();
             $db->close();

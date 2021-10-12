@@ -20,7 +20,7 @@
                 $student["filename"] = sizeof($filename) ? basename($filename[0]) : "";
             }
 
-            Controller::view("status", ["hwfilename"=>basename($file["path"]), "hwfileid"=>$id, "student"=>$studentList]);
+            return Controller::view("status", ["hwfilename"=>basename($file["path"]), "hwfileid"=>$id, "student"=>$studentList]);
         }
     }
 ?>
