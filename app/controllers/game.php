@@ -23,7 +23,7 @@
 
             $teacher = $_SESSION["type"] === "Teacher" ? $_SESSION["user"] : Student::getByUsername($_SESSION["user"])["teacher"];
             $file = File::getById($id);
-            if($file["author"] !== $teacher["username"]) {
+            if($file["author"] !== $teacher) {
                 return Controller::redirect("game");
             }
 

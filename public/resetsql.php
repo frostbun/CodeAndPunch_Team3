@@ -8,33 +8,33 @@
     $db->query("USE Classroom");
     $db->query("CREATE TABLE Teacher (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(50),
+        username VARCHAR(256),
         password VARCHAR(256),
-        fullname VARCHAR(50),
-        email VARCHAR(50),
+        fullname VARCHAR(256),
+        email VARCHAR(256),
         phone VARCHAR(20)
         )");
     $db->query("CREATE TABLE Student (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        teacher VARCHAR(50),
-        username VARCHAR(50),
-        password VARCHAR(255),
-        fullname VARCHAR(50),
-        email VARCHAR(50),
+        teacher VARCHAR(256),
+        username VARCHAR(256),
+        password VARCHAR(256),
+        fullname VARCHAR(256),
+        email VARCHAR(256),
         phone VARCHAR(20)
         )");
     $db->query("CREATE TABLE Upload (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        author VARCHAR(50),
-        path VARCHAR(50),
+        author VARCHAR(256),
+        path VARCHAR(256),
         deadline DATE,
-        hint VARCHAR(255)
+        hint VARCHAR(512)
         )");
     $db->query("CREATE TABLE Message (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        sender VARCHAR(50),
-        receiver VARCHAR(50),
-        content VARCHAR(255),
+        sender VARCHAR(256),
+        receiver VARCHAR(256),
+        content VARCHAR(512),
         datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )");
     echo $db->error;

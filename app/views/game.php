@@ -1,31 +1,35 @@
 <?php require_once "header.php" ?>
 
-<div>
+<div class="container text-center">
     <h1>Games</h1>    
-    <h3> <a href="chat/<?=$data["teacher"]["username"]?>">Teacher: <?=$data["teacher"]["fullname"]?></a> </h3>
-    <table>
-        <tr>
+    <h3 onclick='navigate("/chat/<?=$data["teacher"]["username"]?>")'>Teacher: <?=$data["teacher"]["fullname"]?></h3>
+    <h3>Email: <?=$data["teacher"]["email"]?></h3>
+    <h3>Phone Number: <?=$data["teacher"]["phone"]?></h3>
+    <table class="table table-striped table-hover">
+        <thead> <tr>
             <th>No.</th>
             <th>Hint</th>
             <th>Answer</th>
-        </tr>
-        <?php
+        </tr> </thead>
+        <tbody> <?php
             foreach($data["file"] as $file) {
                 if(!strlen($file["hint"])) continue;
-                echo "<tr>";
-                echo "<td>" . ++$count . "</td>";
-                echo "<td>$file[hint]</td>";
-                echo "<td> <form action='/game/query/$file[id]' method='POST' enctype='multipart/form-data'>";
-                echo "<input type='text' name='answer' placeholder='Answer'>";
-                echo "<button type='submit' name='submit'>Submit</button>";
-                echo "</form> </td>";
+                echo "<tr class='align-middle'>";
+                    echo "<th>" . ++$count . "</th>";
+                    echo "<td class='text-break'>$file[hint]</td>";
+                    echo "<td> <form action='/game/query/$file[id]' method='POST' enctype='multipart/form-data'>";
+                    echo "<div class='input-group'>";
+                        echo "<input type='text' class='form-control form-control-sm' name='answer' placeholder='Answer'>";
+                        echo "<button class='btn btn-outline-primary btn-sm' type='submit' name='submit'>Submit</button>";
+                    echo "</div>";
+                    echo "</form> </td>";
                 echo "</tr>";
             }
-        ?>
+        ?> </tbody>
     </table>
     <?php 
         if($_SESSION["type"] === "Teacher") {
-            echo '<p> <a href="/upload/2">New Game</a> </p>';
+            echo '<p> <a class="btn btn-outline-primary" href="/upload/2">New Game</a> </p>';
         }
     ?>
 </div>

@@ -10,7 +10,9 @@
             $studentList = Student::getByTeacher($_SESSION["user"]);
             foreach($studentList as &$student) {
                 $filename = glob("../uploads/handin/$id/$student[username]/*");
-                $student["filename"] = sizeof($filename) ? basename($filename[0]) : "";
+                $student["handedin"] = sizeof($filename);
+                $student["status"] = $student["handedin"] ? "Handed in" : "Not handed in";
+                $student["filename"] = $student["handedin"] ? basename($filename[0]) : "";
             }
 
             return Controller::view("status", ["hwfilename"=>basename($file["path"]), "hwfileid"=>$id, "student"=>$studentList]);
