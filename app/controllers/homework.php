@@ -6,7 +6,7 @@
                 return Controller::redirect("login");
             }
 
-            if($_SESSION["type"] == "Teacher") {
+            if($_SESSION["type"] === "Teacher") {
                 $teacher = Teacher::getByUsername($_SESSION["user"]);
             }
             else {
@@ -17,7 +17,7 @@
             foreach($fileList as &$file) {
                 $file["name"] = basename($file["path"]);
 
-                if($_SESSION["type"] == "Teacher") {
+                if($_SESSION["type"] === "Teacher") {
                     $handedIn = sizeof(glob("../uploads/handin/$file[id]/*"));
                     $total = Student::getByTeacher($teacher["username"]) !== false ? sizeof(Student::getByTeacher($teacher["username"])) : 0;
                     $file["status"] = "$handedIn/$total students handed in";

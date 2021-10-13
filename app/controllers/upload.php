@@ -13,7 +13,7 @@
         }
         
         public static function newhomework() {
-            if($_SESSION["type"] == "Teacher" && isset($_POST["submit"])) {
+            if($_SESSION["type"] === "Teacher" && isset($_POST["submit"])) {
                 $message = File::upload("../uploads/homework/$_SESSION[user]/", $_FILES["file"]);
                 if(strpos($message, "/") === false) {
                     return Controller::view("upload", ["message"=>$message, "label"=>Upload::$label[0], "type"=>Upload::$type[0]]);
@@ -24,10 +24,10 @@
         }
 
         public static function newhandin($id = -1) {
-            if($_SESSION["type"] == "Student" && isset($_POST["submit"])) {
+            if($_SESSION["type"] === "Student" && isset($_POST["submit"])) {
                 $student = Student::getByUsername($_SESSION["user"]);
                 $file = File::getById($id);
-                if($file["author"] == $student["teacher"]) {
+                if($file["author"] === $student["teacher"]) {
                     $message = File::upload("../uploads/handin/$id/$_SESSION[user]/", $_FILES["file"]);
                     if(strpos($message, "/") === false) {
                         return Controller::view("upload", ["message"=>$message, "label"=>Upload::$label[1], "type"=>Upload::$type[1] . "/$id"]);
@@ -38,10 +38,10 @@
         }
         
         public static function newgame() {
-            if($_SESSION["type"] == "Teacher" && isset($_POST["submit"])) {
+            if($_SESSION["type"] === "Teacher" && isset($_POST["submit"])) {
 
                 $fileType = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
-                if($fileType != "txt") {
+                if($fileType !== "txt") {
                     return Controller::view("upload", ["message"=>"Only TXT is allowed!", "label"=>Upload::$label[2], "type"=>Upload::$type[2]]);
                 }
                 

@@ -15,7 +15,7 @@
                     return Controller::view("login", ["message"=>$message, "user"=>$_POST]);
                 }
             }
-            return Login::render();
+            return Controller::redirect("index");
         }
     }
 ?>

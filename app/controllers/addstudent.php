@@ -5,15 +5,15 @@
             if(!isset($_SESSION["user"])) {
                 return Controller::redirect("login");
             }
-            if($_SESSION["type"] == "Teacher") {
+            if($_SESSION["type"] === "Teacher") {
                 return Controller::view("addstudent");
             }
             return Controller::redirect("manage");
         }
         
         public static function query() {
-            if(!isset($_SESSION["user"]) || $_SESSION["type"] != "Teacher" || !isset($_POST["submit"])) {
-                return AddStudent::render();
+            if(!isset($_SESSION["user"]) || $_SESSION["type"] !== "Teacher" || !isset($_POST["submit"])) {
+                return Controller::redirect("addstudent");
             }
 
             $message = User::validate($_POST["username"], $_POST["password"], $_POST["confirm"], $_POST["fullname"], $_POST["email"], $_POST["phone"]);

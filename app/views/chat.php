@@ -8,7 +8,7 @@
     </form>
     <?php
         foreach($data["message"] as $message) {
-            if($message["sender"] == $data["otherUser"]) {
+            if($message["sender"] === $data["otherUser"]) {
                 echo "<h1>$message[content]</h1>";
                 echo "<h1>$message[datetime]</h1>";
             }

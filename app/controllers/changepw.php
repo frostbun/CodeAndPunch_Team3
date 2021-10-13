@@ -10,7 +10,7 @@
         
         public static function query() {
             if(!isset($_SESSION["user"]) || !isset($_POST["submit"])) {
-                return ChangePw::render();
+                return Controller::redirect("changepw");
             }
 
             $message = User::login($_SESSION["user"], $_POST["password"]);

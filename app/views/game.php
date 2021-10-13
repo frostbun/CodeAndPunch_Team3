@@ -24,7 +24,7 @@
         ?>
     </table>
     <?php 
-        if($_SESSION["type"] == "Teacher") {
+        if($_SESSION["type"] === "Teacher") {
             echo '<p> <a href="/upload/2">New Game</a> </p>';
         }
     ?>

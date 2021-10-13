@@ -20,7 +20,7 @@
                 Teacher::insert($_POST["username"], $_POST["password"], $_POST["fullname"], $_POST["email"], $_POST["phone"]);
                 Teacher::login($_POST["username"], $_POST["password"]);
             }
-            return Register::render();
+            return Controller::redirect("index");
         }
     }
 ?>

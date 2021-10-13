@@ -5,7 +5,7 @@
             if(!isset($_SESSION["user"])) {
                 return Controller::redirect("login");
             }
-            if($_SESSION["type"] == "Teacher") {
+            if($_SESSION["type"] === "Teacher") {
                 $student = Student::getByTeacher($_SESSION["user"]);
                 $teacher = Teacher::getByUsername($_SESSION["user"]);
             }

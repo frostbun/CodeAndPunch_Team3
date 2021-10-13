@@ -36,7 +36,7 @@
                 return "Empty";
             }
 
-            $invalidUsername = ["render", "query", "null", "true", "false", "newhomework", "handin"];
+            $invalidUsername = ["null", "true", "false"];
 
             if(in_array(strtolower($username), $invalidUsername)) {
                 return "Invalid username";
@@ -54,7 +54,7 @@
                 return "Full name can only contains English characters and spaces!";
             }
 
-            if($password != $confirm) {
+            if($password !== $confirm) {
                 return "Password not match";
             }
 

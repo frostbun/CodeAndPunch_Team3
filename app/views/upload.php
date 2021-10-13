@@ -6,11 +6,11 @@
         <label><?=$data["label"]?></label>
         <input type="file" name="file" accept=".pdf, .doc, .docx, .txt">
         <?php
-            if($data["type"] == "newhomework") {
+            if($data["type"] === "newhomework") {
                 echo "<label>Deadline:</label>";
                 echo "<input type='date' id='deadline' name='deadline' value='" . date('Y-m-d') . "' min='" . date('Y-m-d') . "'>";
             }
-            if($data["type"] == "newgame") {
+            if($data["type"] === "newgame") {
                 echo "<label>Hint:</label>";
                 echo "<textarea name='hint' placeholder='hint...' cols='50' rows='3'></textarea>";
             }

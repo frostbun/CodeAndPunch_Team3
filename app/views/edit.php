@@ -4,7 +4,7 @@
     <h1>Edit <?=$data["user"]["username"]?>information</h1>
     <form action="/edit/query?>" method="POST" enctype= "multipart/form-data">
         <?php
-            if($_SESSION["type"] == "Teacher") {
+            if($_SESSION["type"] === "Teacher") {
                 echo "<input type='text' name='fullname' placeholder='Full Name' value='" . $data["user"]["fullname"] . "'>";
             }
         ?>

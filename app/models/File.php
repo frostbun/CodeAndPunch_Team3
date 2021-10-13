@@ -30,13 +30,14 @@
 
         public static function download($path, $file) {
             $target = $path . basename($file);
-            echo $target;
             if(file_exists($target)) {
                 header("Content-Type: application/octet-stream");
                 header("Content-Transfer-Encoding: Binary"); 
                 header("Content-disposition: attachment; filename=\"" . basename($file) . "\""); 
                 readfile($target);
+                return true;
             }
+            return false;
         }
 
         public static function getById($id) {

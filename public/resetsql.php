@@ -35,7 +35,7 @@
         sender VARCHAR(50),
         receiver VARCHAR(50),
         content VARCHAR(255),
-        datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )");
     echo $db->error;
     $db->close();

@@ -2,15 +2,8 @@
     class Status extends Controller {
 
         public static function render($id = -1) {
-            if(!isset($_SESSION["user"])) {
-                return Controller::redirect("login");
-            }
-            if($_SESSION["type"] == "Student") {
-                return Controller::redirect("homework");
-            }
-
             $file = File::getById($id);
-            if($file === false || $file["author"] != $_SESSION["user"]) {
+            if($file["author"] !== $_SESSION["user"]) {
                 return Controller::redirect("homework");
             }
 

@@ -20,7 +20,7 @@
                 echo "<td>$student[email]</td>";
                 echo "<td>$student[phone]</td>";
                 echo "<td> <a href='/chat/$student[username]'>Chat</a> </td>";
-                if($_SESSION["type"] == "Teacher") {
+                if($_SESSION["type"] === "Teacher") {
                     echo "<td> <a href='/edit/$student[username]'>Edit</a> </td>";
                     echo "<td> <a href='/delete/$student[username]'>Delete</a> </td>";
                 }
@@ -29,7 +29,7 @@
         ?>
     </table>
     <?php 
-        if($_SESSION["type"] == "Teacher") {
+        if($_SESSION["type"] === "Teacher") {
             echo '<p> <a href="/addstudent">Add a student</a> </p>';
         }
     ?>
