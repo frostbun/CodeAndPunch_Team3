@@ -16,7 +16,7 @@
                 if(!strlen($file["hint"])) continue;
                 echo "<tr class='align-middle'>";
                     echo "<th>" . ++$count . "</th>";
-                    echo "<td class='text-break'>$file[hint]</td>";
+                    echo "<td class='text-break' style='max-width: 20rem'>$file[hint]</td>";
                     echo "<td> <form action='/game/query/$file[id]' method='POST' enctype='multipart/form-data'>";
                     echo "<div class='input-group'>";
                         echo "<input type='text' class='form-control form-control-sm' name='answer' placeholder='Answer'>";

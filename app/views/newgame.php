@@ -5,7 +5,7 @@
     <form action="/upload/newgame" method="POST" enctype= "multipart/form-data">
         <input class="form-control-file mb-2" type="file" name="file" accept=".txt">
         <div class="form-floating">
-            <textarea class="form-control mb-2" name="hint" placeholder="Hint" style="height: 100px"></textarea>
+            <textarea class="form-control mb-2" name="hint" placeholder="Hint" style="height: 10rem"></textarea>
             <label>Hint</label>
         </div>
         <p class="text-danger"><?=$data["message"]?></p>

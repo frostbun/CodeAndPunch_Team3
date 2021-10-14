@@ -8,7 +8,7 @@
     <script src="/script.js"> </script>
   </head>
 
-  <body style="padding-top: 100px">
+  <body style="padding-top: 10rem">
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top h5">
         <div class="container-fluid">
