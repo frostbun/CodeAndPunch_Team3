@@ -50,12 +50,12 @@
                 header("Content-Type: application/octet-stream");
                 // header("Content-Transfer-Encoding: Binary"); 
                 header("Content-Disposition: attachment; filename=\"" . basename($file) . "\"");
-                header("Expires: 0");
-                header("Cache-Control: must-revalidate");
-                header("Pragma: public");
-                header("Content-Length: " . filesize($target));
-                flush();
-                readfile($target);
+                header("Cache-Control: no-cache, must-revalidate");
+                // header("Expires: 0");
+                // header("Cache-Control: must-revalidate");
+                // header("Pragma: public");
+                // header("Content-Length: " . filesize($target));
+                // flush();
                 readfile($target);
                 return true;
             }
