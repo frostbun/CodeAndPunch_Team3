@@ -49,9 +49,10 @@
         public static function download($path, $file) {
             $target = $path . basename($file);
             if(file_exists($target)) {
+                header('Content-Description: File Transfer');
                 header("Content-Type: application/octet-stream");
-                header("Content-Transfer-Encoding: Binary"); 
-                header("Content-disposition: attachment; filename=\"" . basename($file) . "\""); 
+                // header("Content-Transfer-Encoding: Binary"); 
+                header("Content-Disposition: attachment; filename=\"" . basename($file) . "\""); 
                 readfile($target);
                 return true;
             }
