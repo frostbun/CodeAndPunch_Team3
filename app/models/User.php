@@ -33,7 +33,7 @@
             
             if (empty($username) || empty($password) || empty($confirm) ||
                 empty($fullname) || empty($email) || empty($phone)) {
-                return "Empty";
+                return "You must fill the form!";
             }
 
             $invalidUsername = ["null", "true", "false"];

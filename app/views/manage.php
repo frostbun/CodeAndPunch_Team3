@@ -12,19 +12,21 @@
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
+                <th>Chat</th>
         </tr> </thead>
         <tbody> <?php
             foreach($data["student"] as $student) {
-                echo "<tr class='align-middle' onclick='navigate(\"/chat/$student[username]\")'>";
+                echo "<tr class='align-middle'";
+                if($_SESSION["type"] === "Teacher") {
+                    echo "onclick='navigate(\"/edit/$student[username]\")'";
+                }
+                echo ">";
                     echo "<th>" . ++$count . "</th>";
                     echo "<td>$student[username]</td>";
                     echo "<td>$student[fullname]</td>";
                     echo "<td>$student[email]</td>";
                     echo "<td>$student[phone]</td>";
-                if($_SESSION["type"] === "Teacher") {
-                    echo "<td> <a class='btn btn-outline-primary btn-sm' href='/edit/$student[username]'>Edit</a> </td>";
-                    echo "<td> <a class='btn btn-outline-primary btn-sm' href='/delete/$student[username]'>Delete</a> </td>";
-                }
+                    echo "<td> <a class='btn btn-outline-primary btn-sm' href='/chat/$student[username]'>Chat</a> </td>";
                 echo "</tr>";
             }
         ?> </tbody>

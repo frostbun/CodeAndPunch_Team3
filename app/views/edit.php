@@ -22,6 +22,11 @@
             <label>Phone Number</label>
         </div>
         <p class="text-danger"><?=$data["message"]?></p>
+        <?php
+            if($_SESSION["type"] === "Teacher" && $_SESSION["user"] !== $data["user"]["username"]) {
+                echo "<a class='btn btn-outline-primary' href='/delete/".$data["user"]["username"]."'>Delete</a>";
+            }
+        ?>
         <button class="btn btn-primary" type="submit" name="submit">Change</button>
     </form>
 </div>

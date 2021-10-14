@@ -3,7 +3,6 @@
 
         public static function view($view, $data = []) {
             $data["page"]  = $view;
-            // print_r($data);
             require_once "../app/views/$view.php";
         }
 

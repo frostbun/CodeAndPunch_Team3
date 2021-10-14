@@ -18,13 +18,13 @@
                 $file["name"] = basename($file["path"]);
 
                 if($_SESSION["type"] === "Teacher") {
-                    $handedIn = sizeof(glob("../uploads/handin/$file[id]/*"));
+                    $handedIn = sizeof(glob("../uploads/handin/*/$file[id]"));
                     $total = Student::getByTeacher($teacher["username"]) !== false ? sizeof(Student::getByTeacher($teacher["username"])) : 0;
                     $file["status"] = "$handedIn/$total students handed in";
                 }
 
                 else {
-                    $file["status"] = file_exists("../uploads/handin/$file[id]/$_SESSION[user]/") ? "Handed in" : "Not handed in";
+                    $file["status"] = file_exists("../uploads/handin/$_SESSION[user]/$file[id]/") ? "Handed in" : "Not handed in";
                 }
             }
             return Controller::view("homework", ["teacher"=>$teacher, "file"=>$fileList]);

@@ -59,5 +59,14 @@
             $stmt->close();
             $db->close();
         }
+
+        public static function deleteByUsername($username) {
+            $db = Model::connect();
+            $stmt = $db->prepare("DELETE FROM Message WHERE sender=? OR receiver=?");
+            $stmt->bind_param("ss", $username, $username);
+            $stmt->execute();
+            $stmt->close();
+            $db->close();
+        }
     }
 ?>

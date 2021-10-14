@@ -11,11 +11,12 @@
         }
 
         public static function delete($user = "") {
-            if(!isset($_SESSION["user"])) {
-                return Controller::redirect("login");
-            }
             if($_SESSION["type"]==="Teacher" && Student::getByUsername($user)["teacher"]===$_SESSION["user"]) {
                 Student::delete($user);
+                if(file_exists("../uploads/handin/$user/")) {
+                    File::deleteDir("../uploads/handin/$user/");
+                }
+                Message::deleteByUsername($user);
             }
             return Controller::redirect("manage");
         }

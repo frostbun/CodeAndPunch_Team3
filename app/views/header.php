@@ -8,11 +8,11 @@
     <script src="/script.js"> </script>
   </head>
 
-  <body>
+  <body style="padding-top: 100px">
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top h5">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/">Classroom Management</a>
+          <a class="navbar-brand" href="/"><img src="/ehc_30x.png"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -20,20 +20,20 @@
             <div class="navbar-nav me-auto mb-3 mb-lg-0">
               <?php
                 if(isset($_SESSION["user"])) {
-                  echo '<a class="nav-link active" href="/manage">Students</a>';
-                  echo '<a class="nav-link active" href="/homework">Homeworks</a>';
-                  echo '<a class="nav-link active" href="/game">Games</a>';
+                  echo '<a class="nav-link '.($data["page"]==="manage"?"active":"").'" href="/manage">Students</a>';
+                  echo '<a class="nav-link '.($data["page"]==="homework"?"active":"").'" href="/homework">Homeworks</a>';
+                  echo '<a class="nav-link '.($data["page"]==="game"?"active":"").'" href="/game">Games</a>';
                 }
               ?>
             </div>
             <div class="navbar-nav ml-auto mb-3 mb-lg-0">
               <?php
                 if(isset($_SESSION["user"])) {
-                  echo '<a class="nav-link active" href="/logout">Logout</a>';
+                  echo '<a class="nav-link" href="/logout">Logout</a>';
                 }
                 else {
-                  echo '<a class="nav-link active" href="/login">Login</a>';
-                  echo '<a class="nav-link active" href="/register">Register</a>';
+                  echo '<a class="nav-link" href="/login">Login</a>';
+                  echo '<a class="nav-link" href="/register">Register</a>';
                 }
               ?>
             </div>

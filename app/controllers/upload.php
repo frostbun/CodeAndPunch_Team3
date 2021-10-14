@@ -26,7 +26,7 @@
                 $student = Student::getByUsername($_SESSION["user"]);
                 $file = File::getById($id);
                 if($file["author"] === $student["teacher"]) {
-                    $message = File::upload("../uploads/handin/$id/$_SESSION[user]/", $_FILES["file"]);
+                    $message = File::upload("../uploads/handin/$_SESSION[user]/$id/", $_FILES["file"]);
                     if(strpos($message, "/") === false) {
                         return Controller::view("newhandin", ["message"=>$message, "id"=>$id]);
                     }

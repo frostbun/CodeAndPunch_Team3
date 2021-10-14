@@ -9,7 +9,7 @@
 
             $studentList = Student::getByTeacher($_SESSION["user"]);
             foreach($studentList as &$student) {
-                $filename = glob("../uploads/handin/$id/$student[username]/*");
+                $filename = glob("../uploads/handin/$student[username]/$id/*");
                 $student["handedin"] = sizeof($filename);
                 $student["status"] = $student["handedin"] ? "Handed in" : "Not handed in";
                 $student["filename"] = $student["handedin"] ? basename($filename[0]) : "";
