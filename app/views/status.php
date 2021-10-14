@@ -11,16 +11,11 @@
         </tr> </thead>
         <tbody> <?php
             foreach($data["student"] as $student) {
-                if($student["handedin"]) {
-                    echo "<tr class='align-middle' onclick='navigate(\"/index.php?url=download/handin/$data[hwfileid]/$student[username]/$student[filename]\")'>";
-                }
-                else {
-                    echo "<tr class='align-middle'>";
-                }
-                        echo "<th>" . ++$count . "</th>";
-                        echo "<td>$student[username]</td>";
-                        echo "<td>$student[fullname]</td>";
-                        echo "<td>$student[status]</td>";
+                echo "<tr class='align-middle' ".($student["handedin"]?"onclick='navigate(\"/download/handin/$student[username]/$data[hwfileid]/$student[filename]\")'":"").">";
+                    echo "<th>" . ++$count . "</th>";
+                    echo "<td>$student[username]</td>";
+                    echo "<td>$student[fullname]</td>";
+                    echo "<td>$student[status]</td>";
                 echo "</tr>";
             }
         ?> </tbody>

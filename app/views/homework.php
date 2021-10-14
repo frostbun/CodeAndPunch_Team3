@@ -16,7 +16,7 @@
         <tbody> <?php
             foreach($data["file"] as $file) {
                 if(strlen($file["hint"])) continue;
-                echo "<tr class='align-middle' onclick='navigate(\"/index.php?url=download/homework/$file[name]\")'>";
+                echo "<tr class='align-middle' onclick='navigate(\"/download/homework/$file[name]\")'>";
                     echo "<th>" . ++$count . "</th>";
                     echo "<td>$file[name]</td>";
                     echo "<td>$file[deadline]</td>";
