@@ -29,9 +29,6 @@
         }
 
         public static function deleteDir($dirPath) {
-            if (! is_dir($dirPath)) {
-                throw new InvalidArgumentException("$dirPath must be a directory");
-            }
             if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
                 $dirPath .= '/';
             }
@@ -49,10 +46,16 @@
         public static function download($path, $file) {
             $target = $path . basename($file);
             if(file_exists($target)) {
-                header('Content-Description: File Transfer');
+                header("Content-Description: File Transfer");
                 header("Content-Type: application/octet-stream");
                 // header("Content-Transfer-Encoding: Binary"); 
-                header("Content-Disposition: attachment; filename=\"" . basename($file) . "\""); 
+                header("Content-Disposition: attachment; filename=\"" . basename($file) . "\"");
+                header("Expires: 0");
+                header("Cache-Control: must-revalidate");
+                header("Pragma: public");
+                header("Content-Length: " . filesize($target));
+                flush();
+                readfile($target);
                 readfile($target);
                 return true;
             }
