@@ -21,12 +21,14 @@
                     echo "<td>$file[name]</td>";
                     echo "<td>$file[deadline]</td>";
                     echo "<td>$file[status]</td>";
+                    echo "<td>";
                 if($_SESSION["type"] === "Teacher") {
-                    echo "<td> <a class='btn btn-outline-primary btn-sm' href='/status/$file[id]'>View</a> </td>";
+                    echo "<a class='btn btn-outline-primary btn-sm' href='/status/$file[id]'>View</a>";
                 }
                 else if($file["status"] === "Not handed in") {
-                    echo "<td> <a class='btn btn-outline-primary btn-sm' href='/upload/1/$file[id]'>Hand In</a> </td>";
+                    echo "<a class='btn btn-outline-primary btn-sm' href='/upload/1/$file[id]'>Hand In</a>";
                 }
+                    echo "</td>";
                 echo "</tr>";
             }
         ?> </tbody>

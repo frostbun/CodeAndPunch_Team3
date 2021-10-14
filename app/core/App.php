@@ -7,7 +7,7 @@
             if(isset($_GET["url"])) {
                 $url = explode("/", filter_var(trim($_GET["url"], "/"), FILTER_SANITIZE_URL));
             }
-            echo $_GET["url"];
+            // echo $_GET["url"];
 
             $controller = "index";
             if(file_exists("../app/controllers/$url[0].php")) {
