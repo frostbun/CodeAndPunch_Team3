@@ -9,7 +9,7 @@
             echo "<h1>You are logged out</h1>";
         }
     ?>
-    <img class="img-fluid rounded" src="/bomman.jpg">
+    <img class="img-fluid rounded" src="/ehc.png">
 </div>
 
 <?php require_once "footer.php" ?>
