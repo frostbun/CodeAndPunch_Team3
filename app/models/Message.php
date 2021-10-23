@@ -32,7 +32,7 @@
         
         public static function insert($sender, $receiver, $content) {
             $db = self::connect();
-            $stmt = $db->prepare("INSERT INTO Message (sender, receiver, content, unread) VALUES (?, ?, ?, 1)");
+            $stmt = $db->prepare("INSERT INTO Message (sender, receiver, content) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $sender, $receiver, $content);
             $stmt->execute();
             $stmt->close();
