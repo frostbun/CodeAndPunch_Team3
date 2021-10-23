@@ -3,35 +3,26 @@
 
         public static function render() {
             if(!isset($_SESSION["user"])) {
-                return Controller::redirect("login");
+                return self::redirect("login");
             }
-
-            if($_SESSION["type"] === "Teacher") {
-                $teacher = Teacher::getByUsername($_SESSION["user"]);
-            }
-            else {
-                $teacher = Teacher::getByUsername(Student::getByUsername($_SESSION["user"])["teacher"]);
-            }
+            $teacher = User::getByUsername(User::getByUsername($_SESSION["user"])["teacher"]);
             $fileList = File::getByAuthor($teacher["username"]);
-            return Controller::view("game", ["teacher"=>$teacher, "file"=>$fileList]);
+            return self::view("game", ["teacher"=>$teacher, "file"=>$fileList]);
         }
 
         public static function query($id = -1) {
             if(!isset($_SESSION["user"]) || !isset($_POST["submit"])) {
-                return Controller::redirect("game");
+                return self::redirect("game");
             }
-
-            $teacher = $_SESSION["type"] === "Teacher" ? $_SESSION["user"] : Student::getByUsername($_SESSION["user"])["teacher"];
+            $teacher = User::getByUsername($_SESSION["user"])["teacher"];
             $file = File::getById($id);
             if($file["author"] !== $teacher) {
-                return Controller::redirect("game");
+                return self::redirect("game");
             }
-
             if($_POST["answer"] === pathinfo($file["path"], PATHINFO_FILENAME)) {
-                return Controller::view("answer", ["content"=>file_get_contents($file["path"])]);
+                return self::view("answer", ["content"=>file_get_contents($file["path"])]);
             }
-
-            return Controller::view("rickroll");
+            return self::view("rickroll");
         }
     }
 ?>

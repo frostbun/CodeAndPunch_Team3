@@ -3,11 +3,11 @@
 
         public static function render($id = -1) {
             $file = File::getById($id);
-            if($file["author"] !== $_SESSION["user"]) {
-                return Controller::redirect("homework");
+            if($file["author"] !== $_SESSION["user"] || strlen($file["hint"])) {
+                return self::redirect("homework");
             }
 
-            $studentList = Student::getByTeacher($_SESSION["user"]);
+            $studentList = User::getByTeacher($_SESSION["user"]);
             foreach($studentList as &$student) {
                 $filename = glob("../uploads/handin/$student[username]/$id/*");
                 $student["handedin"] = sizeof($filename);
@@ -15,7 +15,7 @@
                 $student["filename"] = $student["handedin"] ? basename($filename[0]) : "";
             }
 
-            return Controller::view("status", ["hwfilename"=>basename($file["path"]), "hwfileid"=>$id, "student"=>$studentList]);
+            return self::view("status", ["filename"=>basename($file["path"]), "fileid"=>$id, "student"=>$studentList]);
         }
     }
 ?>

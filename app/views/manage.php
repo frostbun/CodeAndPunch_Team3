@@ -31,7 +31,7 @@
             }
         ?> </tbody>
     </table>
-    <?php 
+    <?php
         if($_SESSION["type"] === "Teacher") {
             echo '<p> <a class="btn btn-outline-primary" href="/addstudent">Add a student</a> </p>';
         }

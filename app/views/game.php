@@ -17,12 +17,19 @@
                 echo "<tr class='align-middle'>";
                     echo "<th>" . ++$count . "</th>";
                     echo "<td class='text-break' style='max-width: 20rem'>$file[hint]</td>";
-                    echo "<td> <form action='/game/query/$file[id]' method='POST' enctype='multipart/form-data'>";
-                    echo "<div class='input-group'>";
-                        echo "<input type='text' class='form-control form-control-sm' name='answer' placeholder='Answer'>";
-                        echo "<button class='btn btn-outline-primary btn-sm' type='submit' name='submit'>Submit</button>";
-                    echo "</div>";
-                    echo "</form> </td>";
+                    echo "<td>";
+                    if($_SESSION["type"] === "Student") {
+                        echo "<form action='/game/query/$file[id]' method='POST' enctype='multipart/form-data'>";
+                        echo "<div class='input-group'>";
+                            echo "<input type='text' class='form-control form-control-sm' name='answer' placeholder='Answer'>";
+                            echo "<button class='btn btn-outline-primary btn-sm' type='submit' name='submit'>Submit</button>";
+                        echo "</div>";
+                        echo "</form>";
+                    }
+                    else {
+                        echo "<a class='btn btn-outline-primary btn-sm' href='/upload/delgame/$file[id]'>Delete</a>";
+                    }
+                    echo "</td>";
                 echo "</tr>";
             }
         ?> </tbody>

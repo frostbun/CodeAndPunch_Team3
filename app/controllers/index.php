@@ -2,22 +2,20 @@
     class Index extends Controller {
 
         public static function render() {
-            return Controller::view("index");
+            return self::view("index");
         }
 
         public static function logout() {
             User::logout();
-            return Controller::redirect("index");
+            return self::redirect("index");
         }
 
         public static function delete($user = "") {
-            if($_SESSION["type"]==="Teacher" && Student::getByUsername($user)["teacher"]===$_SESSION["user"]) {
-                Student::delete($user);
-                if(file_exists("../uploads/handin/$user/")) {
-                    File::deleteDir("../uploads/handin/$user/");
-                }
+            if($_SESSION["user"] === User::getByUsername($user)["teacher"]) {
+                User::delete($user);
+                File::deleteDir("../uploads/handin/$user");
             }
-            return Controller::redirect("manage");
+            return self::redirect("manage");
         }
     }
 ?>

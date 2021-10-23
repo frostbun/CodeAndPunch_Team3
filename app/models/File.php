@@ -28,19 +28,16 @@
             return $target;
         }
 
-        public static function deleteDir($dirPath) {
-            if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
-                $dirPath .= '/';
+        public static function deleteDir($dir) {
+            if(is_file($dir)) {
+                return unlink($dir);
             }
-            $files = glob($dirPath . '*', GLOB_MARK);
-            foreach ($files as $file) {
-                if (is_dir($file)) {
-                    self::deleteDir($file);
-                } else {
-                    unlink($file);
+            if(is_dir($dir)) {
+                foreach(glob("$dir/*") as $subdir) {
+                    self::deleteDir($subdir);
                 }
+                rmdir($dir);
             }
-            rmdir($dirPath);
         }
 
         public static function download($path, $file) {
@@ -60,7 +57,7 @@
         }
 
         public static function getById($id) {
-            $db = Model::connect();
+            $db = self::connect();
             $stmt = $db->prepare("SELECT * FROM Upload WHERE id=?");
             $stmt->bind_param("s", $id);
             $stmt->execute();
@@ -74,7 +71,7 @@
         }
 
         public static function getByAuthor($author) {
-            $db = Model::connect();
+            $db = self::connect();
             $stmt = $db->prepare("SELECT * FROM Upload WHERE author=?");
             $stmt->bind_param("s", $author);
             $stmt->execute();
@@ -89,9 +86,18 @@
         }
 
         public static function insert($author, $path, $deadline, $hint) {
-            $db = Model::connect();
+            $db = self::connect();
             $stmt = $db->prepare("INSERT INTO Upload (author, path, deadline, hint) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("ssss", $author, $path, $deadline, $hint);
+            $stmt->execute();
+            $stmt->close();
+            $db->close();
+        }
+
+        public static function delete($id) {
+            $db = self::connect();
+            $stmt = $db->prepare("DELETE FROM Upload WHERE id=?");
+            $stmt->bind_param("s", $id);
             $stmt->execute();
             $stmt->close();
             $db->close();

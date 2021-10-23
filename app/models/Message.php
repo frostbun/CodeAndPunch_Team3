@@ -2,7 +2,7 @@
     class Message extends Model {
 
         public static function getBy2User($u1, $u2) {
-            $db = Model::connect();
+            $db = self::connect();
             $stmt = $db->prepare("SELECT * FROM Message WHERE (sender=? AND receiver=?) OR (sender=? AND receiver=?) ORDER BY datetime DESC");
             $stmt->bind_param("ssss", $u1, $u2, $u2, $u1);
             $stmt->execute();
@@ -17,7 +17,7 @@
         }
 
         public static function getById($id) {
-            $db = Model::connect();
+            $db = self::connect();
             $stmt = $db->prepare("SELECT * FROM Message WHERE id=?");
             $stmt->bind_param("i", $id);
             $stmt->execute();
@@ -31,7 +31,7 @@
         }
         
         public static function insert($sender, $receiver, $content) {
-            $db = Model::connect();
+            $db = self::connect();
             $stmt = $db->prepare("INSERT INTO Message (sender, receiver, content, unread) VALUES (?, ?, ?, 1)");
             $stmt->bind_param("sss", $sender, $receiver, $content);
             $stmt->execute();
@@ -40,8 +40,8 @@
         }
 
         public static function update($id, $content) {
-            $db = Model::connect();
-            $stmt = $db->prepare("UPDATE Message SET content=? WHERE id=?");
+            $db = self::connect();
+            $stmt = $db->prepare("UPDATE Message SET content=?, unread=1 WHERE id=?");
             $stmt->bind_param("si", $content, $id);
             $stmt->execute();
             $stmt->close();
@@ -49,7 +49,7 @@
         }
 
         public static function delete($id) {
-            $db = Model::connect();
+            $db = self::connect();
             $stmt = $db->prepare("DELETE FROM Message WHERE id=?");
             $stmt->bind_param("i", $id);
             $stmt->execute();
@@ -58,7 +58,7 @@
         }
 
         public static function getUnread($u1, $u2) {
-            $db = Model::connect();
+            $db = self::connect();
             $stmt = $db->prepare("SELECT * FROM Message WHERE sender=? AND receiver=? AND unread=1");
             $stmt->bind_param("ss", $u2, $u1);
             $stmt->execute();
@@ -73,7 +73,7 @@
         }
 
         public static function setRead($u1, $u2) {
-            $db = Model::connect();
+            $db = self::connect();
             $stmt = $db->prepare("UPDATE Message SET unread=0 WHERE sender=? AND receiver=?");
             $stmt->bind_param("ss", $u2, $u1);
             $stmt->execute();

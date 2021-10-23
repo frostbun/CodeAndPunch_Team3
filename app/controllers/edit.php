@@ -3,45 +3,29 @@
 
         public static function render($user = "") {
             if(!isset($_SESSION["user"])) {
-                return Controller::redirect("login");
+                return self::redirect("login");
             }
-            
-            if($user === $_SESSION["user"] ||
-                ($_SESSION["type"] === "Teacher" &&
-                Student::getByUsername($user)["teacher"] === $_SESSION["user"])
-            ) {
-                if(Teacher::getByUsername($user)) {
-                    $user = Teacher::getByUsername($user);
-                }
-                else {
-                    $user = Student::getByUsername($user);
-                }
-                return Controller::view("edit", ["user"=>$user]);
+            if($user === $_SESSION["user"] || User::getByUsername($user)["teacher"] === $_SESSION["user"]) {
+                $user = User::getByUsername($user);
+                return self::view("edit", ["user"=>$user]);
             }
-            
-            return Controller::redirect("manage");
+            return self::redirect("manage");
         }
         
         public static function query($user = "") {
             if(!isset($_SESSION["user"]) || !isset($_POST["submit"])) {
-                return Controller::redirect("edit", [$user]);
+                return self::redirect("edit", [$user]);
             }
-
-            $_POST["username"] = $user;
-            $_POST["fullname"] = $_SESSION["type"] === "Teacher" ? $_POST["fullname"] : Student::getByUsername($user)["fullname"];
-            $message = User::validate($user, "AAaa00!!", "AAaa00!!", $_POST["fullname"], $_POST["email"], $_POST["phone"]);
-            if(isset($message)) {
-                return Controller::view("edit", ["message"=>$message, "user"=>$_POST]);
+            if($user === $_SESSION["user"] || User::getByUsername($user)["teacher"] === $_SESSION["user"]) {
+                $_POST["username"] = $user;
+                $_POST["fullname"] = $_SESSION["type"] === "Teacher" ? $_POST["fullname"] : User::getByUsername($user)["fullname"];
+                $message = User::validate($_POST["username"], "AAaa00!!", "AAaa00!!", $_POST["fullname"], $_POST["email"], $_POST["phone"]);
+                if(isset($message)) {
+                    return self::view("edit", ["message"=>$message, "user"=>$_POST]);
+                }
+                User::update($_POST["username"], $_POST["fullname"], $_POST["email"], $_POST["phone"]);
             }
-            
-            if($user === $_SESSION["user"] ||
-                ($_SESSION["type"] === "Teacher" &&
-                Student::getByUsername($user)["teacher"] === $_SESSION["user"])
-            ) {
-                User::update($user, $_POST["fullname"], $_POST["email"], $_POST["phone"]);
-            }
-            
-            return Controller::redirect("manage");
+            return self::redirect("manage");
         }
     }
 ?>

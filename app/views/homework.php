@@ -28,6 +28,9 @@
                 else if($file["status"] === "Not handed in") {
                     echo "<a class='btn btn-outline-primary btn-sm' href='/upload/1/$file[id]'>Hand In</a>";
                 }
+                else {
+                    echo "<a class='btn btn-outline-primary btn-sm' href='/upload/delhandin/$file[id]'>Remove</a>";
+                }
                     echo "</td>";
                 echo "</tr>";
             }

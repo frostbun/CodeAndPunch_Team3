@@ -3,30 +3,30 @@
 
         public static function render() {
             if(!isset($_SESSION["user"])) {
-                return Controller::redirect("login");
+                return self::redirect("login");
             }
-            if($_SESSION["type"] === "Teacher") {
-                return Controller::view("addstudent");
+            if($_SESSION["type"] !== "Teacher") {
+                return self::redirect("manage");
             }
-            return Controller::redirect("manage");
+            return self::view("addstudent");
         }
         
         public static function query() {
             if(!isset($_SESSION["user"]) || $_SESSION["type"] !== "Teacher" || !isset($_POST["submit"])) {
-                return Controller::redirect("addstudent");
+                return self::redirect("addstudent");
             }
 
             $message = User::validate($_POST["username"], $_POST["password"], $_POST["confirm"], $_POST["fullname"], $_POST["email"], $_POST["phone"]);
             if(isset($message)) {
-                return Controller::view("addstudent", ["message"=>$message, "user"=>$_POST]);
+                return self::view("addstudent", ["message"=>$message, "user"=>$_POST]);
             }
             
-            if(Teacher::getByUsername($_POST["username"]) || Student::getByUsername($_POST["username"])) {
-                return Controller::view("addstudent", ["message"=>"User existed", "user"=>$_POST]);
+            if(User::getByUsername($_POST["username"]) !== false) {
+                return self::view("addstudent", ["message"=>"User existed", "user"=>$_POST]);
             }
 
-            Student::insert($_SESSION["user"], $_POST["username"], $_POST["password"], $_POST["fullname"], $_POST["email"], $_POST["phone"]);
-            return Controller::redirect("manage");
+            User::insert($_POST["username"], $_POST["password"], $_POST["fullname"], $_POST["email"], $_POST["phone"], $_SESSION["user"]);
+            return self::redirect("manage");
         }
     }
 ?>
