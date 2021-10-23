@@ -7,9 +7,6 @@
             $stmt->bind_param("ssss", $u1, $u2, $u2, $u1);
             $stmt->execute();
             $result = $stmt->get_result();
-            if($result->num_rows == 0) {
-                return false;
-            }
             $message = [];
             for($i=0; $i<$result->num_rows; ++$i) {
                 array_push($message, $result->fetch_assoc());
@@ -35,7 +32,7 @@
         
         public static function insert($sender, $receiver, $content) {
             $db = Model::connect();
-            $stmt = $db->prepare("INSERT INTO Message (sender, receiver, content) VALUES (?, ?, ?)");
+            $stmt = $db->prepare("INSERT INTO Message (sender, receiver, content, unread) VALUES (?, ?, ?, 1)");
             $stmt->bind_param("sss", $sender, $receiver, $content);
             $stmt->execute();
             $stmt->close();
@@ -60,10 +57,25 @@
             $db->close();
         }
 
-        public static function deleteByUsername($username) {
+        public static function getUnread($u1, $u2) {
             $db = Model::connect();
-            $stmt = $db->prepare("DELETE FROM Message WHERE sender=? OR receiver=?");
-            $stmt->bind_param("ss", $username, $username);
+            $stmt = $db->prepare("SELECT * FROM Message WHERE sender=? AND receiver=? AND unread=1");
+            $stmt->bind_param("ss", $u2, $u1);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $message = [];
+            for($i=0; $i<$result->num_rows; ++$i) {
+                array_push($message, $result->fetch_assoc());
+            }
+            $stmt->close();
+            $db->close();
+            return $message;
+        }
+
+        public static function setRead($u1, $u2) {
+            $db = Model::connect();
+            $stmt = $db->prepare("UPDATE Message SET unread=0 WHERE sender=? AND receiver=?");
+            $stmt->bind_param("ss", $u2, $u1);
             $stmt->execute();
             $stmt->close();
             $db->close();

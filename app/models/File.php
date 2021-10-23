@@ -79,9 +79,6 @@
             $stmt->bind_param("s", $author);
             $stmt->execute();
             $result = $stmt->get_result();
-            if($result->num_rows == 0) {
-                return false;
-            }
             $file = [];
             for($i=0; $i<$result->num_rows; ++$i) {
                 array_push($file, $result->fetch_assoc());

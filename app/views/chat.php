@@ -8,13 +8,12 @@
             <button class="btn btn-outline-primary btn-lg" id="submit" type="submit" name="submit">Send</button>
         </div>
     </form>
+    <a class='btn btn-outline-primary btn-sm' id='delete' hidden>Delete</a>
+    <button class='btn btn-outline-primary btn-sm' id='cancel' onclick='cancel("<?=$data["otherUser"]?>")' hidden>Cancel</button>
     <?php
         foreach($data["message"] as $message) {
             if($message["sender"] === $_SESSION["user"]) {
-                echo "<p class='text-start fs-4 mb-0' id='$message[id]'
-                    onclick='edit(\"$data[otherUser]\", \"$message[id]\", \"$message[content]\")'
-                    ondblclick='navigate(\"/chat/delete/$data[otherUser]/$message[id]\")'
-                    >$message[content]</p>";
+                echo "<p class='text-start fs-4 mb-0' id='$message[id]' onclick='edit(\"$data[otherUser]\", \"$message[id]\", \"$message[content]\")'>$message[content]</p>";
                 echo "<p class='text-start fw-lighter fst-italic'><small>$message[datetime]</small></p>";
             }
             else {

@@ -16,7 +16,6 @@
                 if(file_exists("../uploads/handin/$user/")) {
                     File::deleteDir("../uploads/handin/$user/");
                 }
-                Message::deleteByUsername($user);
             }
             return Controller::redirect("manage");
         }

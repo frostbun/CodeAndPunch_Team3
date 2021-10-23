@@ -8,7 +8,8 @@
             if(Teacher::getByUsername($otherUser)===false && Student::getByUsername($otherUser)===false) {
                 return Controller::redirect("manage");
             }
-            $message = Message::getBy2User($otherUser, $_SESSION["user"]);
+            $message = Message::getBy2User($_SESSION["user"], $otherUser);
+            Message::setRead($_SESSION["user"], $otherUser);
             return Controller::view("chat", ["message"=>$message, "otherUser"=>$otherUser]);
         }
 

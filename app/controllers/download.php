@@ -12,7 +12,7 @@
             }
         }
         
-        public static function handin($id = -1, $student = "", $file = "") {
+        public static function handin($student = "", $id = -1, $file = "") {
             if(Student::getByUsername($student)["teacher"] === $_SESSION["user"]) {
                 if(!File::download("../uploads/handin/$student/$id/", $file)) {
                     Controller::redirect("homework");

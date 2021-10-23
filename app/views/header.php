@@ -33,8 +33,8 @@
                   echo '<a class="nav-link" href="/logout">Logout</a>';
                 }
                 else {
-                  echo '<a class="nav-link" href="/login">Login</a>';
-                  echo '<a class="nav-link" href="/register">Register</a>';
+                  echo '<a class="nav-link '.($data["page"]==="login"?"active":"").'" href="/login">Login</a>';
+                  echo '<a class="nav-link '.($data["page"]==="register"?"active":"").'" href="/register">Register</a>';
                 }
               ?>
             </div>

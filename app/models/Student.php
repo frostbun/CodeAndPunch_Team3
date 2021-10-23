@@ -7,9 +7,6 @@
             $stmt->bind_param("s", $teacher);
             $stmt->execute();
             $result = $stmt->get_result();
-            if($result->num_rows == 0) {
-                return false;
-            }
             $user = [];
             for($i=0; $i<$result->num_rows; ++$i) {
                 array_push($user, $result->fetch_assoc());
