@@ -26,7 +26,7 @@
                     echo "<td>$student[fullname]</td>";
                     echo "<td>$student[email]</td>";
                     echo "<td>$student[phone]</td>";
-                    echo "<td> <a class='btn btn$student[buttonType]-primary btn-sm' href='/chat/$student[username]'>Chat</a> </td>";
+                    echo "<td> <a class='btn $student[buttonType] btn-sm' href='/chat/$student[username]'>Chat</a> </td>";
                 echo "</tr>";
             }
         ?> </tbody>

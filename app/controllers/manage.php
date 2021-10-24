@@ -9,7 +9,7 @@
             $teacher = User::getByUsername($teacherUsername);
             $studentList = User::getByTeacher($teacherUsername);
             foreach($studentList as &$student) {
-                $student["buttonType"] = sizeof(Message::getUnread($_SESSION["user"], $student["username"])) ? "" : "-outline";
+                $student["buttonType"] = sizeof(Message::getUnread($_SESSION["user"], $student["username"])) ? "btn-success" : "btn-outline-primary";
             }
             return self::view("manage", ["student"=>$studentList, "teacher"=>$teacher]);
         }
