@@ -1,21 +1,27 @@
 <?php
     class Game extends Controller {
 
-        public static function render() {
+        private File $File;
+
+        public function Game() {
+            $this->File = self::model("File");
+        }
+
+        public function render() {
             if(!isset($_SESSION["user"])) {
                 return self::redirect("login");
             }
-            $teacher = User::getByUsername(User::getByUsername($_SESSION["user"])["teacher"]);
-            $fileList = File::getByAuthor($teacher["username"]);
+            $teacher = $this->User->getByUsername($this->User->getByUsername($_SESSION["user"])["teacher"]);
+            $fileList = $this->File->getByAuthor($teacher["username"]);
             return self::view("game", ["teacher"=>$teacher, "file"=>$fileList]);
         }
 
-        public static function query($id = -1) {
+        public function query($id = -1) {
             if(!isset($_SESSION["user"]) || !isset($_POST["submit"])) {
                 return self::redirect("game");
             }
-            $teacher = User::getByUsername($_SESSION["user"])["teacher"];
-            $file = File::getById($id);
+            $teacher = $this->User->getByUsername($_SESSION["user"])["teacher"];
+            $file = $this->File->getById($id);
             if($file["author"] !== $teacher) {
                 return self::redirect("game");
             }

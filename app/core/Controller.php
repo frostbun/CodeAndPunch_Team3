@@ -1,9 +1,12 @@
 <?php
     class Controller {
 
+        public User $User;
+
         public function Controller() {
             session_start();
-            if(User::getByUsername($_SESSION["user"]) === false) {
+            $this->User = self::model("User");
+            if($this->User->getByUsername($_SESSION["user"]) === false) {
                 User::logout();
             }
         }
@@ -13,10 +16,13 @@
             require_once "../app/views/$view.php";
         }
 
+        public static function model($model) {
+            require_once "../app/models/$model.php";
+            return new $model;
+        }
+
         public static function redirect($controller, $params = []) {
             header("Location: /$controller/" . implode("/", $params));
-            // require_once "../app/controllers/$controller.php";
-            // call_user_func_array([$controller, "render"], $params);
         }
     }
 ?>

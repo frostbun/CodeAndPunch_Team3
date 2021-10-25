@@ -1,18 +1,18 @@
 <?php
     class Index extends Controller {
 
-        public static function render() {
+        public function render() {
             return self::view("index");
         }
 
-        public static function logout() {
+        public function logout() {
             User::logout();
             return self::redirect("index");
         }
 
-        public static function delete($user = "") {
-            if($_SESSION["user"] === User::getByUsername($user)["teacher"]) {
-                User::delete($user);
+        public function delete($user = "") {
+            if($_SESSION["user"] === $this->User->getByUsername($user)["teacher"]) {
+                $this->User->delete($user);
                 File::deleteDir("../uploads/handin/$user");
             }
             return self::redirect("manage");

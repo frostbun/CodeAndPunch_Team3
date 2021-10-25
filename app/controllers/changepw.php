@@ -1,19 +1,19 @@
 <?php
     class ChangePw extends Controller {
 
-        public static function render() {
+        public function render() {
             if(!isset($_SESSION["user"])) {
                 return self::redirect("login");
             }
             return self::view("changepw");
         }
         
-        public static function query() {
+        public function query() {
             if(!isset($_SESSION["user"]) || !isset($_POST["submit"])) {
                 return self::redirect("changepw");
             }
 
-            $message = User::login($_SESSION["user"], $_POST["password"]);
+            $message = $this->User->login($_SESSION["user"], $_POST["password"]);
             if(isset($message)) {
                 return self::view("changepw", ["message"=>$message]);
             }
@@ -23,7 +23,7 @@
                 return self::view("changepw", ["message"=>$message]);
             }
             
-            User::changepw($_SESSION["user"], $_POST["newpass"]);
+            $this->User->changepw($_SESSION["user"], $_POST["newpass"]);
             return self::redirect("manage");
         }
     }

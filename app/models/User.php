@@ -1,8 +1,8 @@
 <?php
     class User extends Model {
 
-        public static function login($username, $password) {
-            $user = self::getByUsername($username);
+        public function login($username, $password) {
+            $user = $this->getByUsername($username);
             if($user === false) {
                 return "User not found";
             }
@@ -50,9 +50,8 @@
             return null;
         }
 
-        public static function getByUsername($username) {
-            $db = self::connect();
-            $stmt = $db->prepare("SELECT * FROM User WHERE username=?");
+        public function getByUsername($username) {
+            $stmt = $this->prepare("SELECT * FROM User WHERE username=?");
             $stmt->bind_param("s", $username);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -60,13 +59,11 @@
                 return false;
             }
             $stmt->close();
-            $db->close();
             return $result->fetch_assoc();
         }
 
-        public static function getByTeacher($teacher) {
-            $db = self::connect();
-            $stmt = $db->prepare("SELECT * FROM User WHERE teacher=? AND username!=? ORDER BY fullname ASC");
+        public function getByTeacher($teacher) {
+            $stmt = $this->prepare("SELECT * FROM User WHERE teacher=? AND username!=? ORDER BY fullname ASC");
             $stmt->bind_param("ss", $teacher, $teacher);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -75,46 +72,41 @@
                 array_push($user, $result->fetch_assoc());
             }
             $stmt->close();
-            $db->close();
             return $user;
         }
 
-        public static function insert($username, $password, $fullname, $email, $phone, $teacher) {
-            $db = self::connect();
+        public function isSameTeacher($u1, $u2) {
+            return $this->getByUsername($u1)["teacher"] === $this->getByUsername($u2)["teacher"];
+        }
+
+        public function insert($username, $password, $fullname, $email, $phone, $teacher) {
             $password = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $db->prepare("INSERT INTO User (username, password, fullname, email, phone, teacher) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt = $this->prepare("INSERT INTO User (username, password, fullname, email, phone, teacher) VALUES (?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("ssssss", $username, $password, $fullname, $email, $phone, $teacher);
             $stmt->execute();
             $stmt->close();
-            $db->close();
         }
 
-        public static function update($username, $fullname, $email, $phone) {
-            $db = self::connect();
-            $stmt = $db->prepare("UPDATE User SET fullname=?, email=?, phone=? WHERE username=?");
+        public function update($username, $fullname, $email, $phone) {
+            $stmt = $this->prepare("UPDATE User SET fullname=?, email=?, phone=? WHERE username=?");
             $stmt->bind_param("ssss", $fullname, $email, $phone, $username);
             $stmt->execute();
             $stmt->close();
-            $db->close();
         }
 
-        public static function delete($username) {
-            $db = self::connect();
-            $stmt = $db->prepare("DELETE FROM User WHERE username=?");
+        public function delete($username) {
+            $stmt = $this->prepare("DELETE FROM User WHERE username=?");
             $stmt->bind_param("s", $username);
             $stmt->execute();
             $stmt->close();
-            $db->close();
         }
 
-        public static function changepw($username, $password) {
-            $db = self::connect();
+        public function changepw($username, $password) {
             $password = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $db->prepare("UPDATE User SET password=? WHERE username=?");
+            $stmt = $this->prepare("UPDATE User SET password=? WHERE username=?");
             $stmt->bind_param("ss", $password, $username);
             $stmt->execute();
             $stmt->close();
-            $db->close();
         }
     }
 ?>

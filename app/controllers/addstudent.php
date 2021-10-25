@@ -1,7 +1,7 @@
 <?php
     class AddStudent extends Controller {
 
-        public static function render() {
+        public function render() {
             if(!isset($_SESSION["user"])) {
                 return self::redirect("login");
             }
@@ -11,7 +11,7 @@
             return self::view("addstudent");
         }
         
-        public static function query() {
+        public function query() {
             if(!isset($_SESSION["user"]) || $_SESSION["type"] !== "Teacher" || !isset($_POST["submit"])) {
                 return self::redirect("addstudent");
             }
@@ -21,11 +21,11 @@
                 return self::view("addstudent", ["message"=>$message, "user"=>$_POST]);
             }
             
-            if(User::getByUsername($_POST["username"]) !== false) {
+            if($this->User->getByUsername($_POST["username"]) !== false) {
                 return self::view("addstudent", ["message"=>"User existed", "user"=>$_POST]);
             }
 
-            User::insert($_POST["username"], $_POST["password"], $_POST["fullname"], $_POST["email"], $_POST["phone"], $_SESSION["user"]);
+            $this->User->insert($_POST["username"], $_POST["password"], $_POST["fullname"], $_POST["email"], $_POST["phone"], $_SESSION["user"]);
             return self::redirect("manage");
         }
     }

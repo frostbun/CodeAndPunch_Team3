@@ -1,18 +1,24 @@
 <?php
     class Homework extends Controller {
 
-        public static function render() {
+        private File $File;
+
+        public function Homework() {
+            $this->File = self::model("File");
+        }
+
+        public function render() {
             if(!isset($_SESSION["user"])) {
                 return self::redirect("login");
             }
-            $teacher = User::getByUsername(User::getByUsername($_SESSION["user"])["teacher"]);
-            $fileList = File::getByAuthor($teacher["username"]);
+            $teacher = $this->User->getByUsername($this->User->getByUsername($_SESSION["user"])["teacher"]);
+            $fileList = $this->File->getByAuthor($teacher["username"]);
             foreach($fileList as &$file) {
                 $file["name"] = basename($file["path"]);
 
                 if($_SESSION["type"] === "Teacher") {
                     $handedIn = sizeof(glob("../uploads/handin/*/$file[id]"));
-                    $total = sizeof(User::getByTeacher($teacher["username"]));
+                    $total = sizeof($this->User->getByTeacher($teacher["username"]));
                     $file["status"] = "$handedIn/$total students handed in";
                 }
 

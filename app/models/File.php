@@ -56,9 +56,8 @@
             return false;
         }
 
-        public static function getById($id) {
-            $db = self::connect();
-            $stmt = $db->prepare("SELECT * FROM Upload WHERE id=?");
+        public function getById($id) {
+            $stmt = $this->prepare("SELECT * FROM Upload WHERE id=?");
             $stmt->bind_param("s", $id);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -66,13 +65,11 @@
                 return false;
             }
             $stmt->close();
-            $db->close();
             return $result->fetch_assoc();
         }
 
-        public static function getByAuthor($author) {
-            $db = self::connect();
-            $stmt = $db->prepare("SELECT * FROM Upload WHERE author=?");
+        public function getByAuthor($author) {
+            $stmt = $this->prepare("SELECT * FROM Upload WHERE author=?");
             $stmt->bind_param("s", $author);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -81,26 +78,21 @@
                 array_push($file, $result->fetch_assoc());
             }
             $stmt->close();
-            $db->close();
             return $file;
         }
 
-        public static function insert($author, $path, $deadline, $hint) {
-            $db = self::connect();
-            $stmt = $db->prepare("INSERT INTO Upload (author, path, deadline, hint) VALUES (?, ?, ?, ?)");
+        public function insert($author, $path, $deadline, $hint) {
+            $stmt = $this->prepare("INSERT INTO Upload (author, path, deadline, hint) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("ssss", $author, $path, $deadline, $hint);
             $stmt->execute();
             $stmt->close();
-            $db->close();
         }
 
-        public static function delete($id) {
-            $db = self::connect();
-            $stmt = $db->prepare("DELETE FROM Upload WHERE id=?");
+        public function delete($id) {
+            $stmt = $this->prepare("DELETE FROM Upload WHERE id=?");
             $stmt->bind_param("s", $id);
             $stmt->execute();
             $stmt->close();
-            $db->close();
         }
     }
 ?>
