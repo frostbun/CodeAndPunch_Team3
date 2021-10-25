@@ -28,7 +28,7 @@
                     echo "<td>$student[phone]</td>";
                     echo "<td>";
                     if($_SESSION["user"] !== $student["username"]) {
-                        "<a class='btn $student[buttonType] btn-sm' href='/chat/$student[username]'>Chat</a>";
+                        echo "<a class='btn $student[buttonType] btn-sm' href='/chat/$student[username]'>Chat</a>";
                     }
                     echo "</td>";
                 echo "</tr>";
