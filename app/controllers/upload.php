@@ -5,6 +5,7 @@
         private File $File;
 
         public function __construct() {
+            parent::__construct();
             $this->File = self::model("File");
         }
 

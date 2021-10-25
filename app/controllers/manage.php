@@ -4,6 +4,7 @@
         private Message $Message;
 
         public function __construct() {
+            parent::__construct();
             $this->Message = self::model("Message");
         }
 
