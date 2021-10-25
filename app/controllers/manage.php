@@ -11,6 +11,7 @@
             foreach($studentList as &$student) {
                 $student["buttonType"] = sizeof(Message::getUnread($_SESSION["user"], $student["username"])) ? "btn-success" : "btn-outline-primary";
             }
+            $teacher["buttonType"] = sizeof(Message::getUnread($_SESSION["user"], $teacher["username"])) ? "btn-success" : "btn-outline-primary";
             return self::view("manage", ["student"=>$studentList, "teacher"=>$teacher]);
         }
     }

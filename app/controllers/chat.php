@@ -5,7 +5,7 @@
             if(!isset($_SESSION["user"])) {
                 return self::redirect("login");
             }
-            if(User::getByUsername($otherUser) === false) {
+            if(User::getByUsername($_SESSION["user"])["teacher"] !== User::getByUsername($otherUser)["teacher"]) {
                 return self::redirect("manage");
             }
             $message = Message::getBy2User($_SESSION["user"], $otherUser);
@@ -14,7 +14,7 @@
         }
 
         public static function query($otherUser = "") {
-            if(!isset($_SESSION["user"]) || User::getByUsername($otherUser) === false || !isset($_POST["submit"])) {
+            if(!isset($_SESSION["user"]) || User::getByUsername($_SESSION["user"])["teacher"] !== User::getByUsername($otherUser)["teacher"] || !isset($_POST["submit"])) {
                 return self::redirect("chat", [$otherUser]);
             }
             if(strlen($_POST["text"])) {

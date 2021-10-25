@@ -2,7 +2,7 @@
 
 <div class="container text-center">
     <h1>Homeworks</h1>    
-    <h3 onclick='navigate("/chat/<?=$data["teacher"]["username"]?>")'>Teacher: <?=$data["teacher"]["fullname"]?></h3>
+    <h3>Teacher: <?=$data["teacher"]["fullname"]?></h3>
     <h3>Email: <?=$data["teacher"]["email"]?></h3>
     <h3>Phone Number: <?=$data["teacher"]["phone"]?></h3>
     <table class="table table-striped table-hover">
