@@ -4,7 +4,7 @@
         private static $type = ["newhomework", "newhandin", "newgame"];
         private File $File;
 
-        public function Upload() {
+        public function __construct() {
             $this->File = self::model("File");
         }
 

@@ -3,7 +3,7 @@
 
         private File $File;
 
-        public function Homework() {
+        public function __construct() {
             $this->File = self::model("File");
         }
 

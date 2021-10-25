@@ -3,7 +3,7 @@
 
         public User $User;
 
-        public function Controller() {
+        public function __construct() {
             session_start();
             $this->User = self::model("User");
             if($this->User->getByUsername($_SESSION["user"]) === false) {

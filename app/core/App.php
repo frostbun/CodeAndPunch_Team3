@@ -1,7 +1,7 @@
 <?php
     class App {
 
-        public function App() {
+        public function __construct() {
             $url = explode("/", filter_var(trim($_SERVER["REQUEST_URI"], "/"), FILTER_SANITIZE_URL));
             if(isset($_GET["url"])) {
                 $url = explode("/", filter_var(trim($_GET["url"], "/"), FILTER_SANITIZE_URL));

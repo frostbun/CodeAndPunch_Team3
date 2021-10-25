@@ -3,7 +3,7 @@
 
         private Message $Message;
 
-        public function Chat() {
+        public function __construct() {
             $this->Message = self::model("Message");
         }
 

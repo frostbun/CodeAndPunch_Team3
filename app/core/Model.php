@@ -3,7 +3,7 @@
 
         private mysqli $db;
 
-        public function Model() {
+        public function __construct() {
             $host = $_ENV["DB_HOST"];
             $user = $_ENV["DB_USER"];
             $pass = $_ENV["DB_PASS"];
