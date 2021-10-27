@@ -27,7 +27,7 @@
                 return self::redirect("game");
             }
             if($_POST["answer"] === pathinfo($file["path"], PATHINFO_FILENAME)) {
-                return self::view("answer", ["content"=>file_get_contents($file["path"])]);
+                return self::view("answer", ["content"=>htmlspecialchars(file_get_contents($file["path"]))]);
             }
             return self::view("rickroll");
         }
