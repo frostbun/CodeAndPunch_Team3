@@ -1,6 +1,10 @@
 <?php
     class Download extends Controller {
 
+        public function __construct() {
+            self::model("File");
+        }
+        
         public function render() {
             self::redirect("index");
         }

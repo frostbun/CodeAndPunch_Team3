@@ -1,6 +1,10 @@
 <?php
     class Index extends Controller {
 
+        public function __construct() {
+            self::model("File");
+        }
+
         public function render() {
             return self::view("index");
         }

@@ -28,14 +28,14 @@
         
         public function insert($sender, $receiver, $content) {
             $stmt = $this->prepare("INSERT INTO Message (sender, receiver, content) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $sender, $receiver, $content);
+            $stmt->bind_param("sss", $sender, $receiver, htmlspecialchars($content));
             $stmt->execute();
             $stmt->close();
         }
 
         public function update($id, $content) {
             $stmt = $this->prepare("UPDATE Message SET content=?, unread=1 WHERE id=?");
-            $stmt->bind_param("si", $content, $id);
+            $stmt->bind_param("si", htmlspecialchars($content), $id);
             $stmt->execute();
             $stmt->close();
         }

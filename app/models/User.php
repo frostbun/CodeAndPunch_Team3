@@ -43,6 +43,14 @@
                 return "Full name can only contains English characters and spaces!";
             }
 
+            if(!preg_match("/^\w+@[\w\.]+\w+$/", $email)) {
+                return "Invalid email";
+            }
+
+            if(!preg_match("/^\d{10}$/", $phone)) {
+                return "Phone number can only contains 10 numbers!";
+            }
+
             if($password !== $confirm) {
                 return "Password not match";
             }

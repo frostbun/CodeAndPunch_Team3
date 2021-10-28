@@ -83,7 +83,7 @@
 
         public function insert($author, $path, $deadline, $hint) {
             $stmt = $this->prepare("INSERT INTO Upload (author, path, deadline, hint) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $author, $path, $deadline, $hint);
+            $stmt->bind_param("ssss", $author, $path, $deadline, htmlspecialchars($hint));
             $stmt->execute();
             $stmt->close();
         }
