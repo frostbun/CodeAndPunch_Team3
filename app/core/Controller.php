@@ -13,6 +13,7 @@
 
         public static function view($view, $data = []) {
             $data["page"]  = $view;
+            $data["token"] = $_SESSION["token"];
             require_once "../app/views/$view.php";
         }
 
