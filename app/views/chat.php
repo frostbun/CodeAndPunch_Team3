@@ -3,6 +3,7 @@
 <div class="container text-center" style="width: 30%">
     <h1 class="mb-5">Chat with <?=$data["otherUser"]?></h1>
     <form id="form" action="/chat/query/<?=$data["otherUser"]?>" method="POST" enctype= "multipart/form-data">
+        <input type="hidden" name="token" value="<?=$_SESSION["token"]?>">    
         <div class="input-group mb-3">
             <input class="form-control form-control-lg" id="text" type="text" name="text" placeholder="Write something..." autofocus>
             <button class="btn btn-primary btn-lg" id="submit" type="submit" name="submit">Send</button>

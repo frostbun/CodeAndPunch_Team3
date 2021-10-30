@@ -3,6 +3,7 @@
 <div class="container text-center" style="width: 30%">
     <h1>Edit <?=$data["user"]["username"]?> information</h1>
     <form action="/edit/query/<?=$data["user"]["username"]?>" method="POST" enctype= "multipart/form-data">
+        <input type="hidden" name="token" value="<?=$_SESSION["token"]?>">
         <div class="form-floating">    
             <input class="form-control mb-2" type="text" name="fullname" placeholder="Full Name" value="<?=$data["user"]["fullname"]?>"
                 <?php 

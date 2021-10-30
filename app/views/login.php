@@ -4,6 +4,7 @@
     <h1>Login</h1>
     <p>Don't have account? <a href="/register">Register here</a></p>
     <form action="/login/query" method="POST" enctype= "multipart/form-data">
+        <input type="hidden" name="token" value="<?=$_SESSION["token"]?>">
         <div class="form-floating">
             <input class="form-control mb-2" type="text" name="username" placeholder="Username" value="<?=$data["user"]["username"]?>">
             <label>Username</label>

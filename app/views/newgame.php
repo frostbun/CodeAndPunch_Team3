@@ -3,6 +3,7 @@
 <div class="container text-center" style="width: 30%">
     <h1>Upload new game</h1>
     <form action="/upload/newgame" method="POST" enctype= "multipart/form-data">
+        <input type="hidden" name="token" value="<?=$_SESSION["token"]?>">
         <input class="form-control mb-2" type="file" name="file" accept=".txt">
         <div class="form-floating">
             <textarea class="form-control mb-2" name="hint" placeholder="Hint" style="height: 10rem"></textarea>

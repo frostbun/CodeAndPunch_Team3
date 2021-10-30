@@ -20,6 +20,7 @@
                     echo "<td>";
                     if($_SESSION["type"] === "Student") {
                         echo "<form action='/game/query/$file[id]' method='POST' enctype='multipart/form-data'>";
+                        echo "<input type='hidden' name='token' value='$_SESSION[token]'>";
                         echo "<div class='input-group'>";
                             echo "<input type='text' class='form-control form-control-sm' name='answer' placeholder='Answer'>";
                             echo "<button class='btn btn-outline-primary btn-sm' type='submit' name='submit'>Submit</button>";

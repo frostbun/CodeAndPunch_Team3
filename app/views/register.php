@@ -4,6 +4,7 @@
     <h1>Register as a teacher</h1>
     <p>Already have account? <a href="/login">Login here</a></p>
     <form action="/register/query" method="POST" enctype= "multipart/form-data">
+        <input type="hidden" name="token" value="<?=$_SESSION["token"]?>">
         <div class="form-floating">
             <input class="form-control mb-2" type="text" name="username" placeholder="Username" value="<?=$data["user"]["username"]?>">
             <label>Username</label>

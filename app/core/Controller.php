@@ -9,11 +9,14 @@
             if($this->User->getByUsername($_SESSION["user"]) === false) {
                 User::logout();
             }
+            if(isset($_POST["submit"]) && $_POST["token"] !== $_SESSION["token"]) {
+                die("Opsss!");
+            }
+            $_SESSION["token"] = bin2hex(random_bytes(64));
         }
 
         public static function view($view, $data = []) {
             $data["page"]  = $view;
-            $data["token"] = $_SESSION["token"];
             require_once "../app/views/$view.php";
         }
 
